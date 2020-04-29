@@ -112,6 +112,11 @@ UserSchema.methods.signToken = function () {
   });
 };
 
+// ************************ STATIC METHODS ************************ //
+UserSchema.static('findByUsername', function (username) {
+  return this.findOne({ username });
+});
+
 UserSchema.plugin(sanitizeMongoFields);
 UserSchema.plugin(sanitizeSpecifiedFields, [
   'password',
