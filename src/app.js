@@ -1,7 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
-const NotImplementedError = require('./utils/errors/NotImplementedError');
+
 const globalErrorHandler = require('./controllers/errorController');
+const NotImplementedError = require('./utils/errors/AppError');
 
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');

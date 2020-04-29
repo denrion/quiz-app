@@ -4,8 +4,10 @@
   "description": "Quizz App",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "server": "nodemon src/server.js"
+    "start": "cross-env NODE_ENV=production node ./src/server.js",
+    "server": "cross-env NODE_ENV=development nodemon ./src/server.js",
+    "seed": "cross-env NODE_ENV=development node ./src/config/seeder.js --import",
+    "reset": "cross-env NODE_ENV=development node ./src/config/seeder.js --delete"
   },
   "keywords": [],
   "author": "",

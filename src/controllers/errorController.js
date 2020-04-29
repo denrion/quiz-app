@@ -4,6 +4,7 @@ const BadRequestError = require('../utils/errors/BadRequestError');
 const UnauthorizedError = require('../utils/errors/UnauthorizedError');
 
 const sendErrorDev = (err, res) => {
+  console.log('GOT HERE 2');
   res.status(err.statusCode).json({
     status: err.status,
     message: err.message,
