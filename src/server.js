@@ -10,8 +10,9 @@ process.on('uncaughtException', (err) => {
 dotenv.config();
 
 const app = require('./app');
+const connectMongoDB = require('./config/connectMongoDB');
 
-// connectMongoDB();
+connectMongoDB();
 
 const server = app.listen(process.env.PORT, () =>
   console.log(
