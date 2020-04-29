@@ -3,6 +3,18 @@ const status = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/User');
 
+// @desc      Get Current Logged In user
+// @route     GET /api/v1/auth/me
+// @access    Private
+exports.getMe = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  res.status(status.OK).json({
+    success: 'success',
+    data: { user },
+  });
+});
+
 // @desc      Signup user
 // @route     POST /api/v1/auth/signup
 // @access    Public

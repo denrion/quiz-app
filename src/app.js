@@ -21,7 +21,6 @@ if (process.env.NODE_ENV === 'development') {
 
 // 2) ROUTES
 app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/users', userRoutes);
 
 app.all('*', (req, res, next) => {
   next(
