@@ -1,0 +1,29 @@
+{
+  "name": "quizz-app",
+  "version": "1.0.0",
+  "description": "Quizz App",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "server": "nodemon src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "config": "^3.3.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-status": "^1.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.10"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "cross-env": "^7.0.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.3"
+  }
+}
