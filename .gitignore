@@ -2,6 +2,18 @@
 # Created by https://www.gitignore.io/api/node,windows,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=node,windows,visualstudiocode
 
+### React ###
+# production
+/client/build
+
+# misc
+/client.DS_Store
+/client.env.local
+/client.env.development.local
+/client.env.test.local
+/client.env.production.local
+
+
 ### Docker ###
 mongo-volume
 
