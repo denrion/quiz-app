@@ -9,6 +9,9 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express(express.json({ extended: false }));
 
+// Serve static assets in produciton
+app.use(express.static('client/build'));
+
 // 1) GLOBAL MIDDLEWARES
 
 // Body Parser, reading data from body into req.body
@@ -31,18 +34,6 @@ app.all('*', (req, res, next) => {
     new NotImplementedError(`Cannot find ${req.originalUrl} on this server!`)
   );
 });
-
-// Serve static assets in produciton
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-
-  // Set static folder
-  app.use(express.static('client/build'));
-
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  );
-}
 
 // // 3) ERROR HANDLING
 app.use(globalErrorHandler);
