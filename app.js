@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -24,6 +25,15 @@ if (process.env.NODE_ENV === 'development') {
 
 // 2) ROUTES
 app.use('/api/v1/auth', authRoutes);
+
+// Serve static assets in produciton
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res, next) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 app.all('*', (req, res, next) => {
   next(

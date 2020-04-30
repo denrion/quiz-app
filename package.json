@@ -10,7 +10,8 @@
     "reset": "cross-env NODE_ENV=development node config/seeder.js --delete",
     "client": "npm start --prefix client",
     "client-install": "cd ./client/ && npm install",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd ./client/ && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
