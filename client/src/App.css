@@ -225,10 +225,16 @@ img {
 
 .alert {
   padding: 0.7rem;
-  margin: 1rem 0;
+  margin: 1rem auto;
   opacity: 0.9;
   background: var(--light-color);
   color: #333;
+  width: max-content;
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: moveInTop 1s ease-out;
 }
 
 .btn-primary,
@@ -438,5 +444,15 @@ table th {
   .navbar ul {
     text-align: center;
     justify-content: center;
+  }
+}
+
+@keyframes moveInTop {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0.9;
   }
 }

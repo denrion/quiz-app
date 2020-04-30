@@ -4,7 +4,10 @@ const BadRequestError = require('../utils/errors/BadRequestError');
 const UnauthorizedError = require('../utils/errors/UnauthorizedError');
 
 const sendErrorDev = (err, res) => {
-  console.log('GOT HERE 2');
+  if (err.keyPattern && err.keyPattern.hasOwnProperty('username')) {
+    err.message = `User with username ${err.keyValue['username']} already exists. Please use another value!`;
+  }
+
   res.status(err.statusCode).json({
     status: err.status,
     message: err.message,
@@ -64,7 +67,14 @@ const handleCastErrorDB = (err) => {
 
 const handleDuplicateFieldsDB = (err) => {
   const value = err.errmsg.match(/(["'])(?:(?=(\\?))\2.)*?\1/)[0];
-  const message = `Duplicate field value: ${value}. Please use another value!`;
+  let message = `Duplicate field value: ${value}. Please use another value!`;
+
+  if (err.keyPattern.hasOwnProperty('username')) {
+    message = `User with username ${err.keyValue['username']} already exists. Please use another value!`;
+  } else if (err.keyPattern.hasOwnProperty('email')) {
+    message = `User with email ${err.keyValue['email']} already exists. Please use another value!`;
+  }
+
   return new BadRequestError(message);
 };
 

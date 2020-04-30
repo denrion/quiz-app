@@ -1,5 +1,7 @@
 const status = require('http-status');
 
+const BadRequestError = require('../utils/errors/BadRequestError');
+const UnauthorizedError = require('../utils/errors/UnauthorizedError');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/User');
 

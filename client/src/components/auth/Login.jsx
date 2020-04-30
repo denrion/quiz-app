@@ -1,21 +1,43 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AlertContext } from '../../context/alert/AlertProvider';
+import { AuthContext } from '../../context/auth/AuthProvider';
 
-const Login = () => {
+const Login = ({ history }) => {
+  const {
+    loginUser,
+    isAuthenticated,
+    error,
+    clearErrors,
+    loading,
+  } = useContext(AuthContext);
+  const { setAlert } = useContext(AlertContext);
+
+  useEffect(() => {
+    if (isAuthenticated) history.push('/');
+
+    if (error) setAlert(error, 'danger');
+
+    clearErrors();
+
+    // eslint-disable-next-line
+  }, [error, isAuthenticated, history]);
+
   const initialState = {
     username: '',
     password: '',
   };
 
-  const [user, setUser] = useState(initialState);
+  const [credentials, setCredentials] = useState(initialState);
 
-  const { username, password } = user;
+  const { username, password } = credentials;
 
   const onChangeHandler = (event) =>
-    setUser({ ...user, [event.target.name]: event.target.value });
+    setCredentials({ ...credentials, [event.target.name]: event.target.value });
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log('Login submitted');
+
+    loginUser(credentials);
   };
 
   return (
@@ -23,7 +45,7 @@ const Login = () => {
       <h1>
         Account <span className='text-primary'>Login</span>{' '}
       </h1>
-      <form>
+      <form onSubmit={onSubmitHandler}>
         <div className='form-group'>
           <label htmlFor='username'>Username</label>
           <input
@@ -32,6 +54,7 @@ const Login = () => {
             id='username'
             value={username}
             onChange={onChangeHandler}
+            required
           />
         </div>
         <div className='form-group'>
@@ -42,12 +65,14 @@ const Login = () => {
             id='password'
             value={password}
             onChange={onChangeHandler}
+            required
           />
         </div>
         <input
           type='submit'
           value='Login'
           className='btn btn-primary btn-block'
+          disabled={!loading}
         />
       </form>
     </div>

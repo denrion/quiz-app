@@ -1,9 +1,23 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AlertContext } from '../../context/alert/AlertProvider';
+import { AuthContext } from '../../context/auth/AuthProvider';
 
-const Register = () => {
+const Register = ({ history }) => {
+  const { registerUser, error, clearErrors, isAuthenticated } = useContext(
+    AuthContext
+  );
+  const { setAlert } = useContext(AlertContext);
+
+  useEffect(() => {
+    if (isAuthenticated) history.push('/');
+
+    if (error) setAlert(error, 'danger');
+    clearErrors();
+
+    // eslint-disable-next-line
+  }, [error, isAuthenticated, history]);
+
   const initialState = {
-    firstName: '',
-    lastName: '',
     displayName: '',
     username: '',
     password: '',
@@ -12,21 +26,20 @@ const Register = () => {
 
   const [user, setUser] = useState(initialState);
 
-  const {
-    firstName,
-    lastName,
-    displayName,
-    username,
-    password,
-    passwordConfirm,
-  } = user;
+  const { displayName, username, password, passwordConfirm } = user;
 
   const onChangeHandler = (event) =>
     setUser({ ...user, [event.target.name]: event.target.value });
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log('Register submitted');
+
+    registerUser({
+      displayName,
+      username,
+      password,
+      passwordConfirm,
+    });
   };
 
   return (
@@ -36,26 +49,6 @@ const Register = () => {
       </h1>
       <form onSubmit={onSubmitHandler}>
         <div className='form-group'>
-          <label htmlFor='firstName'>First Name</label>
-          <input
-            type='text'
-            name='firstName'
-            id='firstName'
-            value={firstName}
-            onChange={onChangeHandler}
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='lastName'>Last Name</label>
-          <input
-            type='text'
-            name='lastName'
-            id='lastName'
-            value={lastName}
-            onChange={onChangeHandler}
-          />
-        </div>
-        <div className='form-group'>
           <label htmlFor='displayName'>Display Name</label>
           <input
             type='text'
@@ -63,6 +56,9 @@ const Register = () => {
             id='displayName'
             value={displayName}
             onChange={onChangeHandler}
+            required
+            minLength='2'
+            maxLength='30'
           />
         </div>
         <div className='form-group'>
@@ -73,6 +69,9 @@ const Register = () => {
             id='username'
             value={username}
             onChange={onChangeHandler}
+            required
+            minLength='2'
+            maxLength='30'
           />
         </div>
         <div className='form-group'>
@@ -83,6 +82,9 @@ const Register = () => {
             id='password'
             value={password}
             onChange={onChangeHandler}
+            required
+            minLength='8'
+            maxLength='50'
           />
         </div>
         <div className='form-group'>
@@ -93,6 +95,9 @@ const Register = () => {
             id='passwordConfirm'
             value={passwordConfirm}
             onChange={onChangeHandler}
+            required
+            minLength='8'
+            maxLength='50'
           />
         </div>
         <input

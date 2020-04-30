@@ -12,7 +12,7 @@
     "firstName": "John",
     "lastName": "Doe",
     "username": "john1234",
-    "role": "user",
+    "role": "player",
     "password": "test1234"
   },
   {
@@ -20,7 +20,7 @@
     "firstName": "Kevin",
     "lastName": "Smith",
     "username": "kevin1234",
-    "role": "user",
+    "role": "player",
     "password": "test1234"
   },
   {
@@ -28,7 +28,7 @@
     "firstName": "Sasha",
     "lastName": "Ryan",
     "username": "sasha1234",
-    "role": "user",
+    "role": "player",
     "password": "test1234"
   },
   {
@@ -36,7 +36,7 @@
     "firstName": "Mary",
     "lastName": "Williams",
     "username": "mary1234",
-    "role": "user",
+    "role": "player",
     "password": "test1234"
   }
 ]
