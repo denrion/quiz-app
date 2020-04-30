@@ -4,7 +4,7 @@
   "description": "Quizz App",
   "main": "server.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node server.js",
+    "start": "node server.js",
     "server": "cross-env NODE_ENV=development nodemon server.js",
     "seed": "cross-env NODE_ENV=development node config/seeder.js --import",
     "reset": "cross-env NODE_ENV=development node config/seeder.js --delete",
