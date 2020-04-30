@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const {
   sanitizeMongoFields,
   sanitizeSpecifiedFields,
-} = require('./../utils/sanitizeModel');
+} = require('../utils/sanitizeModel');
 
 const UserSchema = new mongoose.Schema(
   {
@@ -20,6 +20,13 @@ const UserSchema = new mongoose.Schema(
       minlength: [2, 'Last name must contain at least 2 characters'],
       maxlength: [30, 'Last name must not contain more than 50 characters'],
     },
+    displayName: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: [2, 'Display name must contain at least 2 characters'],
+      maxlength: [30, 'Display name must not contain more than 30 characters'],
+    },
     username: {
       type: String,
       required: [true, 'Please provide your username'],
@@ -30,8 +37,8 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['USER'],
-      default: 'USER',
+      enum: ['PLAYER', 'QUIZZ_MASTER'],
+      default: 'PLAYER',
       required: true,
       uppercase: true,
     },

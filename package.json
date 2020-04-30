@@ -2,12 +2,12 @@
   "name": "quizz-app",
   "version": "1.0.0",
   "description": "Quizz App",
-  "main": "dist/server.js",
+  "main": "server.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node ./src/server.js",
-    "server": "cross-env NODE_ENV=development nodemon ./src/server.js",
-    "seed": "cross-env NODE_ENV=development node ./src/config/seeder.js --import",
-    "reset": "cross-env NODE_ENV=development node ./src/config/seeder.js --delete"
+    "start": "cross-env NODE_ENV=production node server.js",
+    "server": "cross-env NODE_ENV=development nodemon server.js",
+    "seed": "cross-env NODE_ENV=development node config/seeder.js --import",
+    "reset": "cross-env NODE_ENV=development node config/seeder.js --delete"
   },
   "keywords": [],
   "author": "",
