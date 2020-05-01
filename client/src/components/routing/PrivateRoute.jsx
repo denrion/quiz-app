@@ -8,6 +8,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
   useEffect(() => {
     loadCurrentUser();
+    // eslint-disable-next-line
   }, []);
 
   if (loading) return <Spinner />;

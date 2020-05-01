@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const Navbar = ({ title, icon }) => {
-  const { isAuthenticated, user, logoutUser, loading } = useAuth();
+  const { isAuthenticated, user, logoutUser } = useAuth();
 
   const onLogoutHandler = () => {
     logoutUser();

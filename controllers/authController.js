@@ -5,9 +5,11 @@ const UnauthorizedError = require('../utils/errors/UnauthorizedError');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/User');
 
-// @desc      Get Current Logged In user
-// @route     GET /api/v1/auth/me
-// @access    Private
+/**
+ * @desc      Get Current Logged In user
+ * @route     GET /api/v1/auth/me
+ * @access    Private
+ */
 exports.getMe = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
@@ -17,9 +19,11 @@ exports.getMe = catchAsync(async (req, res, next) => {
   });
 });
 
-// @desc      Signup user
-// @route     POST /api/v1/auth/signup
-// @access    Public
+/**
+ * @desc      Signup user
+ * @route     POST /api/v1/auth/signup
+ * @access    Public
+ */
 exports.signup = catchAsync(async (req, res, next) => {
   const { role, ...user } = req.body;
 
@@ -28,9 +32,11 @@ exports.signup = catchAsync(async (req, res, next) => {
   createAndSendToken(newUser, status.CREATED, res);
 });
 
-// @desc      Login user
-// @route     POST /api/v1/auth/login
-// @access    Public
+/**
+ * @desc      Login user
+ * @route     POST /api/v1/auth/login
+ * @access    Public
+ */
 exports.login = catchAsync(async (req, res, next) => {
   const { username, password } = req.body;
 

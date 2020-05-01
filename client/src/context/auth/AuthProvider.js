@@ -22,11 +22,11 @@ const INITIAL_STATE = {
 
 const CONTEXT_STATE = {
   ...INITIAL_STATE,
-  registerUser: () => {},
-  loginUser: () => {},
+  loadCurrentUser: () => {},
+  registerUser: (formData) => {},
+  loginUser: (formData) => {},
   logoutUser: () => {},
   clearErrors: () => {},
-  loadCurrentUser: () => {},
 };
 
 export const AuthContext = createContext(CONTEXT_STATE);
@@ -44,7 +44,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Register User
   const registerUser = async (formData) => {
     try {
       const response = await API.post('auth/signup', formData);
@@ -56,7 +55,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Login User
   const loginUser = async (formData) => {
     try {
       const response = await API.post('auth/login', formData);
@@ -68,10 +66,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Logout
   const logoutUser = () => dispatch({ type: LOGOUT });
 
-  // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
   return (

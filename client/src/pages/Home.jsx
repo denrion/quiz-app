@@ -1,11 +1,8 @@
 import React from 'react';
+import SubmitQuestion from '../components/qizz/SubmitQuestion';
 
 const Home = () => {
-  return (
-    <div>
-      <h1>Home</h1>
-    </div>
-  );
+  return <SubmitQuestion />;
 };
 
 export default Home;
