@@ -10,14 +10,14 @@ const UserSchema = new mongoose.Schema(
   {
     displayName: {
       type: String,
-      required: true,
+      required: [true, 'This field is required'],
       trim: true,
       minlength: [2, 'Display name must contain at least 2 characters'],
       maxlength: [30, 'Display name must not contain more than 30 characters'],
     },
     username: {
       type: String,
-      required: [true, 'Please provide your username'],
+      required: [true, 'This field is required'],
       unique: true,
       trim: true,
       lowercase: true,
@@ -33,14 +33,14 @@ const UserSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, 'Please provide a password'],
+      required: [true, 'This field is required'],
       minlength: [8, 'Password must contain at least 8 characters'],
       maxlength: [50, 'Password must not contain more than 50 characters'],
       select: false,
     },
     passwordConfirm: {
       type: String,
-      required: [true, 'Please confirm your password'],
+      required: [true, 'This field is required'],
       validate: {
         // This only works on CREATE and SAVE!!!
         validator: function (el) {

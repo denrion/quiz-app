@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { AlertContext } from '../../context/alert/AlertProvider';
 import { AuthContext } from '../../context/auth/AuthProvider';
 
@@ -22,40 +23,38 @@ const Login = ({ history }) => {
     // eslint-disable-next-line
   }, [error, isAuthenticated, history]);
 
-  const initialState = {
-    username: '',
-    password: '',
-  };
+  const { register, handleSubmit, errors } = useForm();
 
-  const [credentials, setCredentials] = useState(initialState);
-
-  const { username, password } = credentials;
-
-  const onChangeHandler = (event) =>
-    setCredentials({ ...credentials, [event.target.name]: event.target.value });
-
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-
-    loginUser(credentials);
-  };
+  const onSubmitHandler = (userCredentials) => loginUser(userCredentials);
 
   return (
     <div className='form-container'>
       <h1>
         Account <span className='text-primary'>Login</span>{' '}
       </h1>
-      <form onSubmit={onSubmitHandler}>
+      <form onSubmit={handleSubmit(onSubmitHandler)}>
         <div className='form-group'>
           <label htmlFor='username'>Username</label>
           <input
             type='text'
             name='username'
             id='username'
-            value={username}
-            onChange={onChangeHandler}
-            required
+            className={errors.username && 'has-error'}
+            ref={register({
+              required: 'This field is required',
+              minLength: {
+                value: 2,
+                message: 'Username must contain at least 2 characters',
+              },
+              maxLength: {
+                value: 30,
+                message: 'Usermame must not contain more than 30 characters',
+              },
+            })}
           />
+          {errors.username && (
+            <span className='is-error'>{errors.username.message}</span>
+          )}
         </div>
         <div className='form-group'>
           <label htmlFor='password'>Password</label>
@@ -63,11 +62,24 @@ const Login = ({ history }) => {
             type='password'
             name='password'
             id='password'
-            value={password}
-            onChange={onChangeHandler}
-            required
+            className={errors.password && 'has-error'}
+            ref={register({
+              required: 'This field is required',
+              minLength: {
+                value: 8,
+                message: 'Password must contain at least 8 characters',
+              },
+              maxLength: {
+                value: 50,
+                message: 'Password must not contain more than 50 characters',
+              },
+            })}
           />
+          {errors.password && (
+            <span className='is-error'>{errors.password.message}</span>
+          )}
         </div>
+
         <input
           type='submit'
           value='Login'

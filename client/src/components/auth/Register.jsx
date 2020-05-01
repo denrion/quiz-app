@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { AlertContext } from '../../context/alert/AlertProvider';
 import { AuthContext } from '../../context/auth/AuthProvider';
 
@@ -17,29 +18,10 @@ const Register = ({ history }) => {
     // eslint-disable-next-line
   }, [error, isAuthenticated, history]);
 
-  const initialState = {
-    displayName: '',
-    username: '',
-    password: '',
-    passwordConfirm: '',
-  };
+  const { register, handleSubmit, errors, getValues } = useForm();
 
-  const [user, setUser] = useState(initialState);
-
-  const { displayName, username, password, passwordConfirm } = user;
-
-  const onChangeHandler = (event) =>
-    setUser({ ...user, [event.target.name]: event.target.value });
-
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-
-    registerUser({
-      displayName,
-      username,
-      password,
-      passwordConfirm,
-    });
+  const onSubmitHandler = (formData) => {
+    registerUser(formData);
   };
 
   return (
@@ -47,19 +29,30 @@ const Register = ({ history }) => {
       <h1>
         Account <span className='text-primary'>Register</span>{' '}
       </h1>
-      <form onSubmit={onSubmitHandler}>
+      <form onSubmit={handleSubmit(onSubmitHandler)}>
         <div className='form-group'>
           <label htmlFor='displayName'>Display Name</label>
           <input
             type='text'
             name='displayName'
             id='displayName'
-            value={displayName}
-            onChange={onChangeHandler}
-            required
-            minLength='2'
-            maxLength='30'
+            className={errors.displayName && 'has-error'}
+            ref={register({
+              required: 'This field is required',
+              minLength: {
+                value: 2,
+                message: 'Display name must contain at least 2 characters',
+              },
+              maxLength: {
+                value: 30,
+                message:
+                  'Display name must not contain more than 30 characters',
+              },
+            })}
           />
+          {errors.displayName && (
+            <span className='is-error'>{errors.displayName.message}</span>
+          )}
         </div>
         <div className='form-group'>
           <label htmlFor='username'>Username</label>
@@ -67,12 +60,22 @@ const Register = ({ history }) => {
             type='text'
             name='username'
             id='username'
-            value={username}
-            onChange={onChangeHandler}
-            required
-            minLength='2'
-            maxLength='30'
+            className={errors.username && 'has-error'}
+            ref={register({
+              required: 'This field is required',
+              minLength: {
+                value: 2,
+                message: 'Username must contain at least 2 characters',
+              },
+              maxLength: {
+                value: 30,
+                message: 'Username must not contain more than 30 characters',
+              },
+            })}
           />
+          {errors.username && (
+            <span className='is-error'>{errors.username.message}</span>
+          )}
         </div>
         <div className='form-group'>
           <label htmlFor='password'>Password</label>
@@ -80,12 +83,22 @@ const Register = ({ history }) => {
             type='password'
             name='password'
             id='password'
-            value={password}
-            onChange={onChangeHandler}
-            required
-            minLength='8'
-            maxLength='50'
+            className={errors.password && 'has-error'}
+            ref={register({
+              required: 'This field is required',
+              minLength: {
+                value: 8,
+                message: 'Password must contain at least 8 characters',
+              },
+              maxLength: {
+                value: 50,
+                message: 'Password must not contain more than 50 characters',
+              },
+            })}
           />
+          {errors.password && (
+            <span className='is-error'>{errors.password.message}</span>
+          )}
         </div>
         <div className='form-group'>
           <label htmlFor='passwordConfirm'>Confirm Password</label>
@@ -93,12 +106,24 @@ const Register = ({ history }) => {
             type='password'
             name='passwordConfirm'
             id='passwordConfirm'
-            value={passwordConfirm}
-            onChange={onChangeHandler}
-            required
-            minLength='8'
-            maxLength='50'
+            className={errors.passwordConfirm && 'has-error'}
+            ref={register({
+              required: 'This field is required',
+              minLength: {
+                value: 8,
+                message: 'Passoword must contain at least 8 characters',
+              },
+              maxLength: {
+                value: 50,
+                message: 'Passoword must not contain more than 50 characters',
+              },
+              validate: (value) =>
+                value === getValues().password || 'Passwords do not match',
+            })}
           />
+          {errors.passwordConfirm && (
+            <span className='is-error'>{errors.passwordConfirm.message}</span>
+          )}
         </div>
         <input
           type='submit'
