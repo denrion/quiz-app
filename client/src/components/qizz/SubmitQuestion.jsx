@@ -1,14 +1,24 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { AlertContext } from '../../context/alert/AlertProvider';
 import { QuizzContext } from '../../context/quizz/QuizzProvider';
 
 const SubmitQuestion = () => {
   const { submitQuestion } = useContext(QuizzContext);
+  const { setAlert } = useContext(AlertContext);
 
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch, errors, reset } = useForm();
   const questionType = watch('type');
 
-  const onSubmitHandler = (formData) => submitQuestion(formData);
+  const onSubmitHandler = (formData) => {
+    submitQuestion(formData);
+    setAlert(
+      'Your question was submitted succesfully. Thank you :)',
+      'success',
+      3000
+    );
+    reset();
+  };
 
   // TODO: Replace this with data from DB
   const questionTypes = ['MULTIPLE_CHOICE', 'TEXT'];
