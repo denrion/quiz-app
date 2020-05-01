@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../context/auth/AuthProvider';
+import useAuth from '../../hooks/useAuth';
 
 const Navbar = ({ title, icon }) => {
-  const { isAuthenticated, user, logoutUser } = useContext(AuthContext);
+  const { isAuthenticated, user, logoutUser, loading } = useAuth();
 
   const onLogoutHandler = () => {
     logoutUser();

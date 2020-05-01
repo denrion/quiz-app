@@ -1,31 +1,28 @@
 import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { Redirect } from 'react-router-dom';
 import { AlertContext } from '../../context/alert/AlertProvider';
-import { AuthContext } from '../../context/auth/AuthProvider';
+import useAuth from '../../hooks/useAuth';
 
-const Login = ({ history }) => {
-  const {
-    loginUser,
-    isAuthenticated,
-    error,
-    clearErrors,
-    loading,
-  } = useContext(AuthContext);
+const Login = (props) => {
+  const { loginUser, isAuthenticated, error, clearErrors } = useAuth();
   const { setAlert } = useContext(AlertContext);
 
   useEffect(() => {
-    if (isAuthenticated) history.push('/');
-
     if (error) setAlert(error, 'danger');
-
     clearErrors();
-
     // eslint-disable-next-line
-  }, [error, isAuthenticated, history]);
+  }, [error]);
 
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmitHandler = (userCredentials) => loginUser(userCredentials);
+
+  if (isAuthenticated) {
+    const referer =
+      (props.location.state && props.location.state.referer) || '/';
+    return <Redirect to={referer} />;
+  }
 
   return (
     <div className='form-container'>
@@ -84,7 +81,6 @@ const Login = ({ history }) => {
           type='submit'
           value='Login'
           className='btn btn-primary btn-block'
-          disabled={!loading}
         />
       </form>
     </div>

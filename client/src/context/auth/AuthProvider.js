@@ -14,7 +14,7 @@ import {
 
 const INITIAL_STATE = {
   token: localStorage.getItem('token'),
-  isAuthenticated: null,
+  isAuthenticated: false,
   loading: true,
   user: null,
   error: null,
@@ -22,11 +22,11 @@ const INITIAL_STATE = {
 
 const CONTEXT_STATE = {
   ...INITIAL_STATE,
-  loadUser: () => {},
   registerUser: () => {},
   loginUser: () => {},
   logoutUser: () => {},
   clearErrors: () => {},
+  loadCurrentUser: () => {},
 };
 
 export const AuthContext = createContext(CONTEXT_STATE);
@@ -34,14 +34,13 @@ export const AuthContext = createContext(CONTEXT_STATE);
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
 
-  // Load User
-  const loadUser = async () => {
+  const loadCurrentUser = async () => {
     try {
-      const res = await API.get('auth/me');
+      const response = await API.get('auth/me');
 
-      dispatch({ type: USER_LOADED, payload: res.data.data.user });
+      dispatch({ type: USER_LOADED, payload: response.data.data.user });
     } catch (error) {
-      dispatch({ type: AUTH_ERROR });
+      dispatch({ type: AUTH_ERROR, payload: error.response.data.message });
     }
   };
 
@@ -78,16 +77,12 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        token: state.token,
-        isAuthenticated: state.isAuthenticated,
-        loading: state.loading,
-        user: state.user,
-        error: state.error,
-        loadUser,
+        ...state,
         registerUser,
         loginUser,
         logoutUser,
         clearErrors,
+        loadCurrentUser,
       }}
     >
       {children}

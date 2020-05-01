@@ -10,11 +10,12 @@
     "reset": "cross-env NODE_ENV=development node config/seeder.js --delete",
     "client": "npm start --prefix client",
     "client-install": "cd ./client/ && npm install",
+    "client-build": "cd ./client/ && npm run build",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd ./client/ && npm install && npm run build"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nemanja Kuzmanovic",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

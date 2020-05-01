@@ -9,9 +9,6 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express(express.json({ extended: false }));
 
-// Serve static assets in produciton
-app.use(express.static('client/build'));
-
 // 1) GLOBAL MIDDLEWARES
 
 // Body Parser, reading data from body into req.body
@@ -28,6 +25,15 @@ if (process.env.NODE_ENV === 'development') {
 
 // 2) ROUTES
 app.use('/api/v1/auth', authRoutes);
+
+// Serve static assets in produciton
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res, next) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 app.all('*', (req, res, next) => {
   next(

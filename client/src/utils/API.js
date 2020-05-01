@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'https://frozen-harbor-86163.herokuapp.com/api/v1/',
-  // baseURL: 'http://localhost:5000/api/v1/',
+  // baseURL: 'https://frozen-harbor-86163.herokuapp.com/api/v1/',
+  baseURL: 'http://localhost:5000/api/v1/',
   responseType: 'json',
 });
 
