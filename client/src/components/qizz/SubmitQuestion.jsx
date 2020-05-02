@@ -85,17 +85,17 @@ const SubmitQuestion = () => {
         </div>
 
         <div className='form-group'>
-          <label htmlFor='question'>Question Text</label>
+          <label htmlFor='questionText'>Question Text</label>
           <textarea
-            name='question'
-            id='question'
-            className={errors.question && 'has-error'}
+            name='questionText'
+            id='questionText'
+            className={errors.questionText && 'has-error'}
             ref={register({
               required: 'This field is required',
             })}
           ></textarea>
-          {errors.question && (
-            <span className='is-error'>{errors.question.message}</span>
+          {errors.questionText && (
+            <span className='is-error'>{errors.questionText.message}</span>
           )}
         </div>
 

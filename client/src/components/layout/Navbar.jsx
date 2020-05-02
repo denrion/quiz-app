@@ -50,7 +50,7 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  title: 'QuizzApp',
+  title: 'QuizApp',
   icon: 'fas fa-question-circle',
 };
 

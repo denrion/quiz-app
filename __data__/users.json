@@ -2,8 +2,15 @@
   {
     "_id": "5e5fee92fb6d94630827c4aa",
     "displayName": "Administrator",
-    "username": "admin1234",
+    "username": "admin",
     "role": "admin",
+    "password": "test1234"
+  },
+  {
+    "_id": "5eada7ba2c238448705e9acb",
+    "displayName": "QuizMaster",
+    "username": "quizmaster",
+    "role": "quiz_master",
     "password": "test1234"
   }
 ]

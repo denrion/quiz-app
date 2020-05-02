@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import AdminDashboard from './components/AdminDashboard';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Alerts from './components/layout/Alert';
 import Navbar from './components/layout/Navbar';
-import QuizMasterDashboard from './components/QuizMasterDashboard';
-import NotFound from './components/routing/NotFound';
 import PrivateRoute from './components/routing/PrivateRoute';
+import AdminDashboard from './pages/AdminDashboard';
 import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import QuizMasterDashboard from './pages/QuizMasterDashboard';
 
 const App = () => {
   return (
