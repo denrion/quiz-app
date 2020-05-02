@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import API from '../../utils/API';
-import quizzReducer from './quizzReducer';
-import { QUESTION_ERROR, SUBMIT_QUESTION } from './quizzTypes';
+import quizReducer from './quizReducer';
+import { QUESTION_ERROR, SUBMIT_QUESTION } from './quizTypes';
 
 const INITIAL_STATE = {
   questions: [],
@@ -14,10 +14,10 @@ const CONTEXT_STATE = {
   submitQuestion: (formData) => {},
 };
 
-export const QuizzContext = createContext(CONTEXT_STATE);
+export const QuizContext = createContext(CONTEXT_STATE);
 
-export const QuizzProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(quizzReducer, INITIAL_STATE);
+export const QuizProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(quizReducer, INITIAL_STATE);
 
   const submitQuestion = async (formData) => {
     try {
@@ -34,13 +34,13 @@ export const QuizzProvider = ({ children }) => {
   };
 
   return (
-    <QuizzContext.Provider
+    <QuizContext.Provider
       value={{
         ...state,
         submitQuestion,
       }}
     >
       {children}
-    </QuizzContext.Provider>
+    </QuizContext.Provider>
   );
 };

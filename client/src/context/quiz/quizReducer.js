@@ -1,6 +1,6 @@
-import { QUESTION_ERROR, SUBMIT_QUESTION } from './quizzTypes';
+import { QUESTION_ERROR, SUBMIT_QUESTION } from './quizTypes';
 
-const quizzReducer = (state, action) => {
+const quizReducer = (state, action) => {
   switch (action.type) {
     case SUBMIT_QUESTION:
       return {
@@ -19,4 +19,4 @@ const quizzReducer = (state, action) => {
   }
 };
 
-export default quizzReducer;
+export default quizReducer;

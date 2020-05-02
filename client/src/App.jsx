@@ -6,6 +6,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Alerts from './components/layout/Alert';
 import Navbar from './components/layout/Navbar';
+import QuizMasterDashboard from './components/QuizMasterDashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Home from './pages/Home';
 
@@ -25,6 +26,12 @@ const App = () => {
               path='/admin'
               roles='ADMIN'
               component={AdminDashboard}
+            />
+            <PrivateRoute
+              exact
+              path='/quizmaster'
+              roles='QUIZ_MASTER'
+              component={QuizMasterDashboard}
             />
           </Switch>
         </div>

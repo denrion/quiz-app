@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AlertContext } from '../../context/alert/AlertProvider';
-import { QuizzContext } from '../../context/quizz/QuizzProvider';
+import { QuizContext } from '../../context/quiz/QuizProvider';
 
 const SubmitQuestion = () => {
-  const { submitQuestion } = useContext(QuizzContext);
+  const { submitQuestion } = useContext(QuizContext);
   const { setAlert } = useContext(AlertContext);
 
   const { register, handleSubmit, watch, errors, reset } = useForm();
