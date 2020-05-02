@@ -3,8 +3,8 @@ import { Redirect, Route } from 'react-router-dom';
 import Spinner from '../../components/layout/Spinner';
 import useAuth from '../../hooks/useAuth';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuthenticated, loading, loadCurrentUser } = useAuth();
+const PrivateRoute = ({ component: Component, roles, ...rest }) => {
+  const { isAuthenticated, loading, loadCurrentUser, user } = useAuth();
 
   useEffect(() => {
     loadCurrentUser();
@@ -16,15 +16,21 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={(props) =>
-        !isAuthenticated && !loading ? (
-          <Redirect
-            to={{ pathname: 'login', state: { referer: props.location } }}
-          />
-        ) : (
-          <Component {...props} />
-        )
-      }
+      render={(props) => {
+        if (!isAuthenticated) {
+          return (
+            <Redirect
+              to={{ pathname: 'login', state: { referer: props.location } }}
+            />
+          );
+        }
+
+        if (roles && roles.indexOf(user.role) === -1) {
+          return <Redirect to={{ pathname: '/' }} />;
+        }
+
+        return <Component {...props} />;
+      }}
     />
   );
 };

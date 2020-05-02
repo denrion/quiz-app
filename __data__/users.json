@@ -1,8 +1,7 @@
 [
   {
     "_id": "5e5fee92fb6d94630827c4aa",
-    "firstName": "Admin",
-    "lastName": "Account",
+    "displayName": "Administrator",
     "username": "admin1234",
     "role": "admin",
     "password": "test1234"

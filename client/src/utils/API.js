@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:5000/api/v1/';
+let baseURL = 'http://localhost:5000/api/v1/';
 
 if (process.env.NODE_ENV === 'production') {
   baseURL = 'https://frozen-harbor-86163.herokuapp.com/api/v1/';

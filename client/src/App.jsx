@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import AdminDashboard from './components/AdminDashboard';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Alerts from './components/layout/Alert';
@@ -19,6 +20,12 @@ const App = () => {
             <PrivateRoute exact path='/' component={Home} />
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
+            <PrivateRoute
+              exact
+              path='/admin'
+              roles='ADMIN'
+              component={AdminDashboard}
+            />
           </Switch>
         </div>
       </>
