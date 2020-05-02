@@ -13,6 +13,7 @@ const PrivateRoute = ({ component: Component, roles, ...rest }) => {
 
   if (loading) return <Spinner />;
 
+  console.log('here');
   return (
     <Route
       {...rest}

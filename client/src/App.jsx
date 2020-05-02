@@ -7,6 +7,7 @@ import Register from './components/auth/Register';
 import Alerts from './components/layout/Alert';
 import Navbar from './components/layout/Navbar';
 import QuizMasterDashboard from './components/QuizMasterDashboard';
+import NotFound from './components/routing/NotFound';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Home from './pages/Home';
 
@@ -33,6 +34,8 @@ const App = () => {
               roles='QUIZ_MASTER'
               component={QuizMasterDashboard}
             />
+
+            <Route component={NotFound} />
           </Switch>
         </div>
       </>

@@ -23,8 +23,8 @@ const Login = (props) => {
     let pathname =
       referer || user.role === 'ADMIN'
         ? '/admin'
-        : user.role === 'QUIZZ_MASTER'
-        ? '/quizzmaster'
+        : user.role === 'QUIZ_MASTER'
+        ? '/quizmaster'
         : '/';
     return <Redirect to={pathname} />;
   }
