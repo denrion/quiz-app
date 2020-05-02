@@ -6,37 +6,5 @@
     "username": "admin1234",
     "role": "admin",
     "password": "test1234"
-  },
-  {
-    "_id": "5e5fee92fb6d94630827c4ab",
-    "firstName": "John",
-    "lastName": "Doe",
-    "username": "john1234",
-    "role": "player",
-    "password": "test1234"
-  },
-  {
-    "_id": "5e5fee92fb6d94630827c4ac",
-    "firstName": "Kevin",
-    "lastName": "Smith",
-    "username": "kevin1234",
-    "role": "player",
-    "password": "test1234"
-  },
-  {
-    "_id": "5e5fee92fb6d94630827c4ad",
-    "firstName": "Sasha",
-    "lastName": "Ryan",
-    "username": "sasha1234",
-    "role": "player",
-    "password": "test1234"
-  },
-  {
-    "_id": "5e5fee92fb6d94630827c4ae",
-    "firstName": "Mary",
-    "lastName": "Williams",
-    "username": "mary1234",
-    "role": "player",
-    "password": "test1234"
   }
 ]

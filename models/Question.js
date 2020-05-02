@@ -33,6 +33,7 @@ const QuestionSchema = new mongoose.Schema(
       required: [true, 'This field is required'],
       trim: true,
     },
+    maxPoints: Number,
     answer: {
       type: String,
       trim: true,
@@ -77,6 +78,19 @@ const QuestionSchema = new mongoose.Schema(
 // ************************ VIRTUALS ************************ //
 
 // ************************ DOCUMENT MIDDLEWARE ************************ //
+QuestionSchema.pre('validate', function (next) {
+  if (this.type === 'TEXT') return next();
+
+  const answers = [this.answerA, this.answerB, this.answerC, this.answerD];
+  const message = 'Answers cannot be repeated';
+
+  if (answers.includes(this.answerA)) this.invalidate('answerA', message);
+  if (answers.includes(this.answerB)) this.invalidate('answerB', message);
+  if (answers.includes(this.answerC)) this.invalidate('answerC', message);
+  if (answers.includes(this.answerD)) this.invalidate('answerD', message);
+
+  next();
+});
 
 // ************************ INSTANCE METHODS ************************ //
 
