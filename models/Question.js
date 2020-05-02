@@ -63,7 +63,7 @@ const QuestionSchema = new mongoose.Schema(
       trim: true,
       default: undefined,
     },
-    submittedBy: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
