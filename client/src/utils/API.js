@@ -3,7 +3,7 @@ import axios from 'axios';
 let baseURL = 'http://localhost:5000/api/v1/';
 
 if (process.env.NODE_ENV === 'production') {
-  baseURL = 'https://frozen-harbor-86163.herokuapp.com/api/v1/';
+  baseURL = 'salty-castle-90488.herokuapp.com/api/v1/';
 }
 
 const API = axios.create({
