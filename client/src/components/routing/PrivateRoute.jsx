@@ -1,17 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import Spinner from '../../components/layout/Spinner';
 import useAuth from '../../hooks/useAuth';
 
 const PrivateRoute = ({ component: Component, roles, ...rest }) => {
-  const { isAuthenticated, loading, loadCurrentUser, user } = useAuth();
-
-  useEffect(() => {
-    loadCurrentUser();
-    // eslint-disable-next-line
-  }, []);
-
-  if (loading) return <Spinner />;
+  const { isAuthenticated, user } = useAuth();
 
   return (
     <Route

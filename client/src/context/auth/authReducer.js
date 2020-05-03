@@ -6,6 +6,7 @@ import {
   LOGOUT,
   REGISTER_FAIL,
   REGISTER_SUCCESS,
+  SET_LOADING,
   USER_LOADED,
 } from './authTypes';
 
@@ -44,6 +45,11 @@ const authReducer = (state, action) => {
       return {
         ...state,
         error: null,
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;

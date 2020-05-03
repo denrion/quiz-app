@@ -5,7 +5,7 @@ import { AlertContext } from '../../context/alert/AlertProvider';
 import useAuth from '../../hooks/useAuth';
 
 const Login = (props) => {
-  const { loginUser, isAuthenticated, error, clearErrors, user } = useAuth();
+  const { loginUser, isAuthenticated, error, clearErrors } = useAuth();
   const { setAlert } = useContext(AlertContext);
 
   useEffect(() => {
@@ -19,14 +19,9 @@ const Login = (props) => {
   const onSubmitHandler = (userCredentials) => loginUser(userCredentials);
 
   if (isAuthenticated) {
-    const referer = props.location.state && props.location.state.referer;
-    let pathname =
-      referer || user.role === 'ADMIN'
-        ? '/admin'
-        : user.role === 'QUIZ_MASTER'
-        ? '/quizmaster'
-        : '/';
-    return <Redirect to={pathname} />;
+    const referer =
+      (props.location.state && props.location.state.referer) || '/';
+    return <Redirect to={referer} />;
   }
 
   return (

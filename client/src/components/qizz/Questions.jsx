@@ -28,28 +28,12 @@ const Questions = () => {
     },
   ];
 
-  const textQuestions = questions.filter(
-    (question) => question.type === 'TEXT'
-  );
-  const choiceQuestions = questions.filter(
-    (question) => question.type === 'MULTIPLE_CHOICE'
-  );
-
   return (
     <>
       <DataTable
-        title='Text questions'
+        title='Sumitted questions'
         columns={columns}
-        data={textQuestions}
-        customStyles={customStyles}
-        pagination
-        selectableRows
-        dense
-      />
-      <DataTable
-        title='Multiple Choice questions'
-        columns={columns}
-        data={choiceQuestions}
+        data={questions}
         customStyles={customStyles}
         pagination
         selectableRows

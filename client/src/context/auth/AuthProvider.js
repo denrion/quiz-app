@@ -9,13 +9,14 @@ import {
   LOGOUT,
   REGISTER_FAIL,
   REGISTER_SUCCESS,
+  SET_LOADING,
   USER_LOADED,
 } from './authTypes';
 
 const INITIAL_STATE = {
   token: localStorage.getItem('token'),
   isAuthenticated: false,
-  loading: true,
+  loading: false,
   user: null,
   error: null,
 };
@@ -35,6 +36,8 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
 
   const loadCurrentUser = async () => {
+    setLoading();
+
     try {
       const response = await API.get('auth/me');
 
@@ -46,6 +49,8 @@ export const AuthProvider = ({ children }) => {
 
   const registerUser = async (formData) => {
     try {
+      setLoading();
+
       const response = await API.post('auth/signup', formData);
 
       dispatch({ type: REGISTER_SUCCESS, payload: response.data.data });
@@ -57,6 +62,8 @@ export const AuthProvider = ({ children }) => {
 
   const loginUser = async (formData) => {
     try {
+      setLoading();
+
       const response = await API.post('auth/login', formData);
 
       dispatch({ type: LOGIN_SUCCESS, payload: response.data.data });
@@ -69,6 +76,8 @@ export const AuthProvider = ({ children }) => {
   const logoutUser = () => dispatch({ type: LOGOUT });
 
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
+
+  const setLoading = () => dispatch({ type: SET_LOADING });
 
   return (
     <AuthContext.Provider
