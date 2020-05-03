@@ -5,7 +5,8 @@ const quizReducer = (state, action) => {
     case GET_QUESTIONS:
       return {
         ...state,
-        questions: action.payload,
+        questions: action.payload.data.questions,
+        totalResults: action.payload.totalResults,
         loading: false,
       };
     case SUBMIT_QUESTION:

@@ -1,13 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { QuizContext } from '../../context/quiz/QuizProvider';
+import { QUESTION_CATEGORIES, QUESTION_TYPES } from './constants';
 
 const SubmitQuestion = () => {
-  const { submitQuestion, error } = useContext(QuizContext);
+  const { submitQuestion } = useContext(QuizContext);
 
   const { register, handleSubmit, watch, errors, reset, getValues } = useForm();
   const questionType = watch('type');
 
+<<<<<<< HEAD:client/src/components/quiz/SubmitQuestion.jsx
   useEffect(() => {
     if (!error) reset();
     // eslint-disable-next-line
@@ -26,6 +28,12 @@ const SubmitQuestion = () => {
     'SCIENCE',
     'OTHER',
   ];
+=======
+  const onSubmitHandler = (formData) => {
+    submitQuestion(formData);
+    if (!!errors) reset();
+  };
+>>>>>>> add question test data, improve questions table:client/src/components/qizz/SubmitQuestion.jsx
 
   return (
     <>
@@ -40,12 +48,12 @@ const SubmitQuestion = () => {
             className={errors.category && 'has-error'}
             ref={register({
               validate: (value) =>
-                questionCategories.includes(value) ||
+                QUESTION_CATEGORIES.includes(value) ||
                 'You must choose an option',
             })}
           >
             <option value=''>Choose an option</option>
-            {questionCategories.map((category, index) => (
+            {QUESTION_CATEGORIES.map((category, index) => (
               <option key={index} value={category}>
                 {category}
               </option>
@@ -64,11 +72,11 @@ const SubmitQuestion = () => {
             className={errors.type && 'has-error'}
             ref={register({
               validate: (value) =>
-                questionTypes.includes(value) || 'You must choose an option',
+                QUESTION_TYPES.includes(value) || 'You must choose an option',
             })}
           >
             <option value=''>Choose an option</option>
-            {questionTypes.map((type, index) => (
+            {QUESTION_TYPES.map((type, index) => (
               <option key={index} value={type}>
                 {type}
               </option>

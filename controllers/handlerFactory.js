@@ -14,10 +14,13 @@ exports.getAll = (Model) =>
 
     const documents = await features.query;
 
+    const totalResults = await Model.countDocuments();
+
     res.status(status.OK).json({
       status: 'success',
-      results: documents.length,
-      pagination: features.createPaginationLinks(await Model.countDocuments()),
+      returnedResults: documents.length,
+      totalResults,
+      pagination: features.createPaginationLinks(totalResults),
       data: { [`${lowercaseFirstLetter(Model.modelName)}s`]: documents },
     });
   });

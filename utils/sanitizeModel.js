@@ -13,7 +13,7 @@ const sanitizeMongoFields = (schema) => {
     delete json._id;
     delete json.__v;
     delete json.updatedAt;
-    delete json.createdAt;
+    // delete json.createdAt;
 
     return json;
   };

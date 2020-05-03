@@ -1,0 +1,174 @@
+[
+  {
+    "_id": "5eaed5889e5a4606e8748695",
+    "category": "GEOGRAPHY",
+    "type": "TEXT",
+    "questionText": "What is the capital of Turkey?",
+    "answer": "Ankara",
+    "user": "5eaed2302ba0cd40d403b8b0"
+  },
+  {
+    "_id": "5eaed5cb9e5a4606e8748696",
+    "category": "GEOGRAPHY",
+    "type": "TEXT",
+    "questionText": "What is the national animal of China?",
+    "answer": "Giant panda",
+    "user": "5eaed2302ba0cd40d403b8b0"
+  },
+  {
+    "_id": "5eaed5e69e5a4606e8748697",
+    "category": "GEOGRAPHY",
+    "type": "TEXT",
+    "questionText": "Which Turkish city has the name of a cartoon character?",
+    "answer": "Batman",
+    "user": "5eaed2302ba0cd40d403b8b0"
+  },
+  {
+    "_id": "5eaed5fa9e5a4606e8748698",
+    "category": "GEOGRAPHY",
+    "type": "TEXT",
+    "questionText": "What is the noisiest city in the world?",
+    "answer": "Hong Kong",
+    "user": "5eaed2302ba0cd40d403b8b0"
+  },
+  {
+    "_id": "5eaed60b9e5a4606e8748699",
+    "category": "HISTORY",
+    "type": "TEXT",
+    "questionText": "Which German Count invented the zeppelin?",
+    "answer": "Count (Von) Zeppelin",
+    "user": "5eaed2302ba0cd40d403b8b0"
+  },
+  {
+    "_id": "5eaed6179e5a4606e874869a",
+    "category": "HISTORY",
+    "type": "TEXT",
+    "questionText": "Who was the first president of the USA?",
+    "answer": "George Washington",
+    "user": "5eaed2302ba0cd40d403b8b0"
+  },
+  {
+    "_id": "5eaed62e9e5a4606e874869b",
+    "category": "HISTORY",
+    "type": "TEXT",
+    "questionText": "How many women did Henry VIII have?",
+    "answer": "Six women",
+    "user": "5eaed2302ba0cd40d403b8b0"
+  },
+  {
+    "_id": "5eaed7238261da3ee4baf5e1",
+    "category": "MUSIC",
+    "type": "TEXT",
+    "questionText": "What is Elvis Presley s middle name?",
+    "answer": "Aaron",
+    "user": "5eaed7138261da3ee4baf5e0"
+  },
+  {
+    "_id": "5eaed7338261da3ee4baf5e2",
+    "category": "MUSIC",
+    "type": "TEXT",
+    "questionText": "Who is the singer of The Counting Crows?",
+    "answer": "Adam Duritz",
+    "user": "5eaed7138261da3ee4baf5e0"
+  },
+  {
+    "_id": "5eaed7418261da3ee4baf5e3",
+    "category": "MUSIC",
+    "type": "TEXT",
+    "questionText": "Who was the Queen of Soul?",
+    "answer": "Aretha Franklin",
+    "user": "5eaed7138261da3ee4baf5e0"
+  },
+  {
+    "_id": "5eaed7a48261da3ee4baf5e4",
+    "category": "LANGUAGE",
+    "type": "TEXT",
+    "questionText": "What is the name of a medicinal mud?",
+    "answer": "Fango",
+    "user": "5eaed7138261da3ee4baf5e0"
+  },
+  {
+    "_id": "5eaed7c78261da3ee4baf5e5",
+    "category": "POLITICS",
+    "type": "TEXT",
+    "questionText": "Who is the dictator of Cuba?",
+    "answer": "Fidel Castro",
+    "user": "5eaed7138261da3ee4baf5e0"
+  },
+  {
+    "_id": "5eaed7d98261da3ee4baf5e6",
+    "category": "LANGUAGE",
+    "type": "TEXT",
+    "questionText": "What is the most spoken language in Belgium?",
+    "answer": "Dutch language",
+    "user": "5eaed7138261da3ee4baf5e0"
+  },
+  {
+    "_id": "5eaed8908261da3ee4baf5e7",
+    "category": "TRASH",
+    "type": "MULTIPLE_CHOICE",
+    "questionText": "Kraljica kog Hrvatskog, pardon Srpskog, grada je Anica u pesmi Marka Perkovića Thompsona?",
+    "answerA": "Zadar",
+    "answerB": "Vukovar",
+    "answerC": "Knin",
+    "answerD": "Dubrovnik",
+    "correctAnswer": "C",
+    "user": "5eaed7138261da3ee4baf5e0"
+  },
+  {
+    "_id": "5eaed8a88261da3ee4baf5e8",
+    "category": "TRASH",
+    "type": "MULTIPLE_CHOICE",
+    "questionText": "Koja pesme Jale Brata i Bube Korelija ima najviše pregleda na JuTjubu?",
+    "answerA": "Kamikaza",
+    "answerB": "Onae",
+    "answerC": "Nema Bolje",
+    "answerD": "Klinka",
+    "correctAnswer": "B",
+    "user": "5eaed7138261da3ee4baf5e0"
+  },
+  {
+    "_id": "5eaed8b58261da3ee4baf5e9",
+    "category": "TRASH",
+    "type": "TEXT",
+    "questionText": "Kog pevača je žena Ace Lukasa ostavila, da bi bila sa Lukasom?",
+    "answer": "Željko Šašić",
+    "user": "5eaed7138261da3ee4baf5e0"
+  },
+  {
+    "_id": "5eaed8e38261da3ee4baf5ea",
+    "category": "GEOGRAPHY",
+    "type": "MULTIPLE_CHOICE",
+    "questionText": "Na kom ostrvu se nalazi grad Kaljari?",
+    "answerA": "Sicilija",
+    "answerB": "Sardinija",
+    "answerC": "Malta",
+    "answerD": "Korzika",
+    "correctAnswer": "B",
+    "user": "5eaed7138261da3ee4baf5e0"
+  },
+  {
+    "_id": "5eaed8f98261da3ee4baf5eb",
+    "category": "FILM & TV",
+    "type": "TEXT",
+    "questionText": "Na kom ostrvu se događa radnja filma \"The Rock\"?",
+    "answer": "Alcatraz",
+    "user": "5eaed7138261da3ee4baf5e0"
+  },
+  {
+    "_id": "5eaed9078261da3ee4baf5ec",
+    "category": "TRASH",
+    "type": "TEXT",
+    "questionText": "Sa kime je Šaban Šaulić snimo duet koje je izaša na IDJ Videos/TV?",
+    "answer": "Tea Tairović",
+    "user": "5eaed7138261da3ee4baf5e0"
+  },
+  {
+    "_id": "5eaed91b8261da3ee4baf5ed",
+    "category": "HISTORY",
+    "type": "TEXT",
+    "questionText": "Koja tri kralja su se borili za tron Engleske 1066?",
+    "answer": "Harald Hadrada, Harold Godwineson, William de Normandie (aka William the Bastard, William the Conqueror)",
+    "user": "5eaed7138261da3ee4baf5e0"
+  }
+]

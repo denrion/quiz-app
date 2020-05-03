@@ -7,6 +7,7 @@
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
+  --warning-color: #f0ad4e;
 }
 
 * {
@@ -277,6 +278,14 @@ img {
   color: #fff;
 }
 
+.btn-warning,
+.bg-warning,
+.badge-warning,
+.alert-warning {
+  background: var(--warning-color);
+  color: #fff;
+}
+
 .btn-white,
 .bg-white,
 .badge-white,
@@ -443,6 +452,8 @@ table th {
   }
 }
 
+/* CUSTOM */
+
 @keyframes moveInTop {
   0% {
     opacity: 0;
@@ -459,4 +470,29 @@ table th {
 
 .has-error {
   border: 1px solid red !important;
+}
+
+.spinner {
+  margin: 16px auto;
+  animation: rotate360 1s linear infinite;
+  transform: translateZ(0);
+  border-top: 2px solid grey;
+  border-right: 2px solid grey;
+  border-bottom: 2px solid grey;
+  border-left: 4px solid black;
+  background: transparent;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

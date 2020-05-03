@@ -6,13 +6,14 @@ import { GET_QUESTIONS, QUESTION_ERROR, SUBMIT_QUESTION } from './quizTypes';
 
 const INITIAL_STATE = {
   questions: [],
+  totalResults: 10,
   error: null,
   loading: true,
 };
 
 const CONTEXT_STATE = {
   ...INITIAL_STATE,
-  getQuestions: () => {},
+  getQuestions: (page = 1, limit = 10, sort = '-createdAt') => {},
   submitQuestion: (formData) => {},
 };
 
@@ -22,13 +23,15 @@ export const QuizProvider = ({ children }) => {
   const { setAlert } = useContext(AlertContext);
   const [state, dispatch] = useReducer(quizReducer, INITIAL_STATE);
 
-  const getQuestions = async () => {
+  const getQuestions = async (page = 1, limit = 10, sort = '-createdAt') => {
     try {
-      const response = await API.get('questions');
+      const response = await API.get(
+        `questions?page=${page}&limit=${limit}&sort=${sort}`
+      );
 
       dispatch({
         type: GET_QUESTIONS,
-        payload: response.data.data.questions,
+        payload: response.data,
       });
     } catch (error) {
       dispatch({

@@ -4,12 +4,20 @@ const { sanitizeMongoFields } = require('../utils/sanitizeModel');
 const questionTypes = ['MULTIPLE_CHOICE', 'TEXT'];
 const questionCategories = [
   'TRASH',
+  'ART & CULTURE',
+  'BIOLOGY',
+  'ECONOMY',
+  'FILM & TV',
+  'FOOD & DRINKS',
+  'LITERATURE',
+  'LANGUAGE',
+  'POLITICS',
   'HISTORY',
   'MUSIC',
   'SPORT',
   'GEOGRAPHY',
   'SCIENCE',
-  'OTHER',
+  'MISCELLANEOUS',
 ];
 
 const QuestionSchema = new mongoose.Schema(
