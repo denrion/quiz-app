@@ -1,5 +1,6 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 import API from '../../utils/API';
+import { AlertContext } from '../alert/AlertProvider';
 import quizReducer from './quizReducer';
 import { GET_QUESTIONS, QUESTION_ERROR, SUBMIT_QUESTION } from './quizTypes';
 
@@ -18,6 +19,7 @@ const CONTEXT_STATE = {
 export const QuizContext = createContext(CONTEXT_STATE);
 
 export const QuizProvider = ({ children }) => {
+  const { setAlert } = useContext(AlertContext);
   const [state, dispatch] = useReducer(quizReducer, INITIAL_STATE);
 
   const getQuestions = async () => {
@@ -41,11 +43,22 @@ export const QuizProvider = ({ children }) => {
       const response = await API.post('questions', formData);
 
       dispatch({ type: SUBMIT_QUESTION, payload: response.data.data });
+
+      setAlert(
+        'Your question was submitted succesfully. Thank you :)',
+        'success',
+        3000
+      );
     } catch (error) {
       dispatch({
         type: QUESTION_ERROR,
         payload: error.response.data.message,
       });
+      setAlert(
+        'Your question was not submitted succesfully. Please try again!',
+        'danger',
+        3000
+      );
     }
   };
 

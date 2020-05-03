@@ -1,24 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { AlertContext } from '../../context/alert/AlertProvider';
 import { QuizContext } from '../../context/quiz/QuizProvider';
 
 const SubmitQuestion = () => {
-  const { submitQuestion } = useContext(QuizContext);
-  const { setAlert } = useContext(AlertContext);
+  const { submitQuestion, error } = useContext(QuizContext);
 
-  const { register, handleSubmit, watch, errors, reset } = useForm();
+  const { register, handleSubmit, watch, errors, reset, getValues } = useForm();
   const questionType = watch('type');
 
-  const onSubmitHandler = (formData) => {
-    submitQuestion(formData);
-    setAlert(
-      'Your question was submitted succesfully. Thank you :)',
-      'success',
-      3000
-    );
-    reset();
-  };
+  useEffect(() => {
+    if (!error) reset();
+  }, []);
+
+  const onSubmitHandler = (formData) => submitQuestion(formData);
 
   // TODO: Replace this with data from DB
   const questionTypes = ['MULTIPLE_CHOICE', 'TEXT'];
@@ -127,6 +121,11 @@ const SubmitQuestion = () => {
                 className={errors.answerA && 'has-error'}
                 ref={register({
                   required: 'This field is required',
+                  validate: (value) =>
+                    (value !== getValues().answerB &&
+                      value !== getValues().answerC &&
+                      value !== getValues().answerD) ||
+                    'Answers cannot repeat',
                 })}
               />
               {errors.answerA && (
@@ -142,6 +141,11 @@ const SubmitQuestion = () => {
                 id='answerB'
                 ref={register({
                   required: 'This field is required',
+                  validate: (value) =>
+                    (value !== getValues().answerA &&
+                      value !== getValues().answerC &&
+                      value !== getValues().answerD) ||
+                    'Answers cannot repeat',
                 })}
               />
               {errors.answerB && (
@@ -157,6 +161,11 @@ const SubmitQuestion = () => {
                 id='answerC'
                 ref={register({
                   required: 'This field is required',
+                  validate: (value) =>
+                    (value !== getValues().answerA &&
+                      value !== getValues().answerB &&
+                      value !== getValues().answerD) ||
+                    'Answers cannot repeat',
                 })}
               />
               {errors.answerC && (
@@ -172,6 +181,11 @@ const SubmitQuestion = () => {
                 id='answerD'
                 ref={register({
                   required: 'This field is required',
+                  validate: (value) =>
+                    (value !== getValues().answerA &&
+                      value !== getValues().answerB &&
+                      value !== getValues().answerC) ||
+                    'Answers cannot repeat',
                 })}
               />
               {errors.answerD && (
