@@ -9,31 +9,10 @@ const SubmitQuestion = () => {
   const { register, handleSubmit, watch, errors, reset, getValues } = useForm();
   const questionType = watch('type');
 
-<<<<<<< HEAD:client/src/components/quiz/SubmitQuestion.jsx
-  useEffect(() => {
-    if (!error) reset();
-    // eslint-disable-next-line
-  }, []);
-
-  const onSubmitHandler = (formData) => submitQuestion(formData);
-
-  // TODO: Replace this with data from DB
-  const questionTypes = ['MULTIPLE_CHOICE', 'TEXT'];
-  const questionCategories = [
-    'TRASH',
-    'HISTORY',
-    'MUSIC',
-    'SPORT',
-    'GEOGRAPHY',
-    'SCIENCE',
-    'OTHER',
-  ];
-=======
   const onSubmitHandler = (formData) => {
     submitQuestion(formData);
     if (!!errors) reset();
   };
->>>>>>> add question test data, improve questions table:client/src/components/qizz/SubmitQuestion.jsx
 
   return (
     <>
