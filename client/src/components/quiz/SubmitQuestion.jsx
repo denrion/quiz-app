@@ -10,6 +10,7 @@ const SubmitQuestion = () => {
 
   useEffect(() => {
     if (!error) reset();
+    // eslint-disable-next-line
   }, []);
 
   const onSubmitHandler = (formData) => submitQuestion(formData);

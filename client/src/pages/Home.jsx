@@ -1,5 +1,5 @@
 import React from 'react';
-import SubmitQuestion from '../components/qizz/SubmitQuestion';
+import SubmitQuestion from '../components/quiz/SubmitQuestion';
 import useAuth from '../hooks/useAuth';
 import AdminDashboard from './AdminDashboard';
 import QuizMasterDashboard from './QuizMasterDashboard';
