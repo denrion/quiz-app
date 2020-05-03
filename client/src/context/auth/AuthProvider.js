@@ -55,7 +55,6 @@ export const AuthProvider = ({ children }) => {
 
       dispatch({ type: REGISTER_SUCCESS, payload: response.data.data });
     } catch (error) {
-      console.log(error.response);
       dispatch({ type: REGISTER_FAIL, payload: error.response.data.message });
     }
   };
@@ -68,7 +67,6 @@ export const AuthProvider = ({ children }) => {
 
       dispatch({ type: LOGIN_SUCCESS, payload: response.data.data });
     } catch (error) {
-      console.log(error.response);
       dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
     }
   };
