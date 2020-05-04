@@ -76,12 +76,12 @@ const Login = (props) => {
             <span className='is-error'>{errors.password.message}</span>
           )}
         </div>
-
-        <input
+        <button
           type='submit'
-          value='Login'
-          className='btn btn-primary btn-block'
-        />
+          className='btn btn--primary btn--block btn--big btn--round btn--animated my-3'
+        >
+          Login
+        </button>
       </form>
     </div>
   );

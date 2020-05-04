@@ -125,11 +125,9 @@ const Register = ({ history }) => {
             <span className='is-error'>{errors.passwordConfirm.message}</span>
           )}
         </div>
-        <input
-          type='submit'
-          value='Register'
-          className='btn btn-primary btn-block'
-        />
+        <button type='submit' className='btn btn--primary btn--block my-3'>
+          Register
+        </button>
       </form>
     </div>
   );

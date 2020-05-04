@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../../hooks/useAuth';
 
 const PrivateRoute = ({ component: Component, roles, ...rest }) => {
   const { isAuthenticated, user } = useAuth();
@@ -12,7 +12,7 @@ const PrivateRoute = ({ component: Component, roles, ...rest }) => {
         if (!isAuthenticated) {
           return (
             <Redirect
-              to={{ pathname: 'login', state: { referer: props.location } }}
+              to={{ pathname: '/login', state: { referer: props.location } }}
             />
           );
         }

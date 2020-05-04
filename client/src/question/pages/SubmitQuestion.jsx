@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { QuizContext } from '../../context/quiz/QuizProvider';
-import { QUESTION_CATEGORIES, QUESTION_TYPES } from './constants';
+import { QUESTION_CATEGORIES, QUESTION_TYPES } from '../components/constants';
 
 const SubmitQuestion = () => {
   const { submitQuestion } = useContext(QuizContext);
@@ -16,9 +16,9 @@ const SubmitQuestion = () => {
 
   return (
     <>
-      <h1 className='text-center my-3'>Submit Question</h1>
+      <h1 className='text-center my-1'>Submit Question</h1>
 
-      <form onSubmit={handleSubmit(onSubmitHandler)}>
+      <form onSubmit={handleSubmit(onSubmitHandler)} className='form-container'>
         <div className='form-group'>
           <label htmlFor='category'>Question Category</label>
           <select
@@ -205,11 +205,11 @@ const SubmitQuestion = () => {
           </>
         )}
 
-        <input
-          type='submit'
-          value='Submit'
-          className='btn btn-primary btn-block my-3'
-        />
+        <div className='center'>
+          <button type='submit' className='btn btn--primary my-3'>
+            Submit
+          </button>
+        </div>
       </form>
     </>
   );

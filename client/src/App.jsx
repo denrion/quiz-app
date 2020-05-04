@@ -1,15 +1,20 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './App.css';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
-import FullPageSpinner from './components/layout//FullPageSpinner';
-import Alerts from './components/layout/Alert';
-import Navbar from './components/layout/Navbar';
-import PrivateRoute from './components/routing/PrivateRoute';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import './App.scss';
+import Login from './auth/pages/Login';
+import Register from './auth/pages/Register';
 import useAuth from './hooks/useAuth';
-import Home from './pages/Home';
-import NotFound from './pages/NotFound';
+import SubmitQuestion from './question/pages/SubmitQuestion';
+import MainNavigation from './shared/components/Navigation/MainNavigation';
+import PrivateRoute from './shared/components/Routing/PrivateRoute';
+import Alerts from './shared/components/UIElements/Alerts';
+import FullPageSpinner from './shared/components/UIElements/FullPageSpinner';
+import Home from './shared/pages/Home';
 
 const App = () => {
   const { loadCurrentUser, loading, token } = useAuth();
@@ -23,18 +28,24 @@ const App = () => {
 
   return (
     <Router>
-      <>
-        <Navbar />
+      <MainNavigation />
+      {/* <Navbar /> */}
+      <main>
         <div className='container'>
           <Alerts />
           <Switch>
             <PrivateRoute exact path='/' component={Home} />
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
-            <Route component={NotFound} />
+            <PrivateRoute
+              exact
+              path='/questions/new'
+              component={SubmitQuestion}
+            />
+            <Redirect to='/' />
           </Switch>
         </div>
-      </>
+      </main>
     </Router>
   );
 };

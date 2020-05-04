@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import DataTable, { defaultThemes } from 'react-data-table-component';
 import { QuizContext } from '../../context/quiz/QuizProvider';
-import Spinner from '../layout/Spinner';
+import Spinner from '../../shared/components/UIElements/Spinner';
 import Question from './Question';
 
 const Questions = () => {
@@ -38,7 +38,7 @@ const Questions = () => {
   const actions = (
     <button
       key='add'
-      className='btn btn-primary'
+      className='btn btn--primary'
       style={{ marginRight: '0' }}
       onClick={onAddHandler}
     >
@@ -79,15 +79,15 @@ const Questions = () => {
         center: true,
         button: true,
         cell: (row) => (
-          <div>
+          <div className='center'>
             <button
-              className='btn btn-sm btn-warning'
+              className='btn btn--small btn--warning'
               onClick={() => onEditHandler(row.id)}
             >
               E
             </button>
             <button
-              className='btn btn-sm btn-danger'
+              className='btn btn--small btn--danger'
               onClick={() => onDeleteHandler(row.id)}
             >
               D

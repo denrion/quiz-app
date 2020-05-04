@@ -1,0 +1,26 @@
+@import '../../../sass/variables';
+
+.spinner {
+  margin: 16px auto;
+  animation: rotate360 1s linear infinite;
+  transform: translateZ(0);
+  border-top: 2px solid $color-primary-light;
+  border-right: 2px solid $color-primary-light;
+  border-bottom: 2px solid $color-primary-light;
+  border-left: 4px solid $color-primary-dark;
+  background: transparent;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

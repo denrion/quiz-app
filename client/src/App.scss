@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
+@import './sass/variables';
+@import './sass/base';
+@import './sass/utilities';
+
+// BUTTON
+.btn {
+  &,
+  &:link,
+  &:visited {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    // default colors
+    background: $color-white;
+    color: $color-grey-dark;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  // Button Size
+
+  // btn--big
+  &--big {
+    font-size: $default-font-size;
+    padding: 1.5rem 4rem;
+  }
+
+  // btn--sm
+  &--small {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin-right: 0.2rem;
+  }
+
+  &--round {
+    border-radius: 10rem;
+  }
+
+  // Button fancy
+  &--animated {
+    transition: all 0.2s;
+    position: relative;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+
+      &::after {
+        transform: scaleX(1.4) scaleY(1.6);
+        opacity: 0;
+      }
+    }
+
+    &:active {
+      transform: translateY(-1px);
+      box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+    }
+
+    &::after {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      border-radius: 100px;
+      background-color: $color-white;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: all 0.4s;
+    }
+  }
+
+  // Button Colors
+
+  // btn--block
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  // btn--link
+  &--link {
+    background: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &--dark {
+    background-color: $color-dark;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-dark;
+    }
+  }
+
+  // btn--primary
+  &--primary {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary;
+    }
+  }
+
+  // btn--success
+  &--success {
+    background-color: $color-success;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-success;
+    }
+  }
+
+  // btn--danger
+  &--danger {
+    background-color: $color-danger;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-danger;
+    }
+  }
+
+  // btn--warning
+  &--warning {
+    background-color: $color-warning;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-warning;
+    }
+  }
+}
+
+/* Forms */
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='date'],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  font-size: $default-font-size;
+  border: 1px solid #ccc;
+}
+
+.form-group {
+  margin: 1.2rem 0;
+}
+
+.form-group input {
+  margin: 0.2rem 0;
+}
+
+.form-container {
+  max-width: 50%;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.form-container h1,
+h2,
+h3 {
+  text-align: center;
+}
+
+/* CUSTOM */
+
+@keyframes moveInTop {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0.9;
+  }
+}
+
+.is-error {
+  color: red;
+}
+
+.has-error {
+  border: 1px solid red !important;
+}
