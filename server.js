@@ -1,11 +1,13 @@
 const colors = require('colors');
 const dotenv = require('dotenv');
 
-process.on('uncaughtException', (err) => {
-  console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
-  console.log(err.name, err.message);
-  process.exit(1);
-});
+if (process.env.NODE_ENV === 'production') {
+  process.on('uncaughtException', (err) => {
+    console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+    console.log(err.name, err.message);
+    process.exit(1);
+  });
+}
 
 dotenv.config();
 

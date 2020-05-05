@@ -1,6 +1,7 @@
 const status = require('http-status');
 const InternalServerError = require('../utils/errors/InternalServerError');
 const lowercaseFirstLetter = require('../utils/helpers/lowercaseFirstLetter');
+const setCorrectPluralEnding = require('../utils/helpers/setCorrectPluralEnding');
 const catchAsync = require('../utils/catchAsync');
 const APIFeatures = require('../utils/APIFeatures');
 
@@ -21,7 +22,11 @@ exports.getAll = (Model) =>
       returnedResults: documents.length,
       totalResults,
       pagination: features.createPaginationLinks(totalResults),
-      data: { [`${lowercaseFirstLetter(Model.modelName)}s`]: documents },
+      data: {
+        [setCorrectPluralEnding(
+          lowercaseFirstLetter(Model.modelName)
+        )]: documents,
+      },
     });
   });
 
@@ -43,7 +48,7 @@ exports.getOne = (Model, populateOptions) =>
     });
   });
 
-exports.createQuestion = (Model) =>
+exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const document = await Model.create(req.body);
 

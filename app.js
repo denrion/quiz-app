@@ -7,6 +7,7 @@ const NotImplementedError = require('./utils/errors/AppError');
 
 const authRoutes = require('./routes/authRoutes');
 const questionRoutes = require('./routes/questionRoutes');
+const quizRoutes = require('./routes/quizRoutes');
 
 const app = express(express.json({ extended: false }));
 
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV === 'development') {
 // 2) ROUTES
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/questions', questionRoutes);
+app.use('/api/v1/quizzes', quizRoutes);
 
 // Serve static assets in produciton
 if (process.env.NODE_ENV === 'production') {

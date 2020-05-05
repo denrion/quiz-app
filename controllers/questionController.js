@@ -13,4 +13,4 @@ exports.getAllQuestions = factory.getAll(Question);
  * @desc    Create New Question
  * @access  Private
  */
-exports.createQuestion = factory.createQuestion(Question);
+exports.createQuestion = factory.createOne(Question);
