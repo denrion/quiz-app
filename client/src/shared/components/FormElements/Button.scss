@@ -11,13 +11,17 @@
     display: inline-block;
     text-decoration: none;
     text-transform: uppercase;
+    font: inherit;
     font-size: 1.4rem;
     letter-spacing: 1px;
     padding: 1rem 2rem;
     margin-right: 1rem;
     border-radius: 4px;
-    border: none;
+    border: 1px solid;
     cursor: pointer;
+
+    // fix font flicker when removing hover state
+    backface-visibility: hidden;
   }
 
   &:focus {
@@ -27,13 +31,11 @@
   // Button Size
   &--small {
     font-size: 1rem;
-    padding: 0.5rem 1rem;
     margin-right: 0.2rem;
   }
 
   &--big {
     font-size: $default-font-size;
-    padding: 1.5rem 4rem;
   }
 
   // Button shape
@@ -41,24 +43,10 @@
     border-radius: 10rem;
   }
 
-  &--round {
-    border-radius: 50%;
-    height: 5rem;
-    width: 5rem;
-    font-size: 1rem;
-    padding: 0.5 1rem;
-  }
-
   // Button look
   &--block {
     display: block;
     width: 100%;
-  }
-
-  &--link {
-    background: none;
-    padding: 0;
-    margin: 0;
   }
 
   // Button colors
@@ -92,7 +80,7 @@
   }
 
   // Button fancy
-  &--animate {
+  &--cta {
     transition: all 0.2s;
     position: relative;
 

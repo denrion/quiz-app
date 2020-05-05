@@ -132,7 +132,7 @@ const Register = ({ history }) => {
           shape='rounded'
           size='big'
           display='block'
-          effect='animate'
+          effect='cta'
           className='my-3'
         >
           Register

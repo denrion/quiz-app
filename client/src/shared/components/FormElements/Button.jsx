@@ -44,7 +44,7 @@ Button.propTypes = {
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
   size: PropTypes.oneOf(['normal', 'small', 'big']),
   shape: PropTypes.oneOf(['square', 'rounded']),
-  effect: PropTypes.oneOf(['no-effect', 'inverse', 'animate']),
+  effect: PropTypes.oneOf(['no-effect', 'inverse', 'cta']),
   display: PropTypes.oneOf(['inline', 'block']),
   color: PropTypes.oneOf([
     'default',

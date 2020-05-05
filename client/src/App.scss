@@ -16,6 +16,15 @@ textarea {
   border: 1px solid #ccc;
 }
 
+input[type='text'].has-error,
+input[type='email'].has-error,
+input[type='password'].has-error,
+input[type='date'].has-error,
+select.has-error,
+textarea.has-error {
+  border: 1px solid red;
+}
+
 .form-group {
   margin: 1.2rem 0;
 }
@@ -36,22 +45,6 @@ h3 {
   text-align: center;
 }
 
-/* CUSTOM */
-
-@keyframes moveInTop {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 0.9;
-  }
-}
-
 .is-error {
   color: red;
-}
-
-.has-error {
-  border: 1px solid red !important;
 }
