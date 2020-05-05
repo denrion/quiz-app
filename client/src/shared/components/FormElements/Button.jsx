@@ -9,14 +9,19 @@ const Button = (props) => {
 
   if (props.href) {
     return (
-      <a className={btnClasses} href={props.href}>
+      <a className={btnClasses} href={props.href} style={props.style}>
         {props.children}
       </a>
     );
   }
   if (props.to) {
     return (
-      <Link to={props.to} exact={props.exact} className={btnClasses}>
+      <Link
+        to={props.to}
+        exact={props.exact}
+        className={btnClasses}
+        style={props.style}
+      >
         {props.children}
       </Link>
     );
@@ -27,6 +32,7 @@ const Button = (props) => {
       type={props.type}
       onClick={props.onClick}
       disabled={props.disabled}
+      style={props.style}
     >
       {props.children}
     </button>

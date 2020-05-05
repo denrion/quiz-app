@@ -20,13 +20,8 @@ const Questions = () => {
 
   useEffect(() => {
     getQuestions();
-    console.log('selected rows', selectedRows);
     // eslint-disable-next-line
-  }, [selectedRows]);
-
-  // const onAddHandler = useCallback(() => {
-  //   alert('Add question - not implemented yet');
-  // }, []);
+  }, []);
 
   const onDeleteHandler = useCallback((id) => {
     alert(`Delete question (id: ${id}) - not implemented yet`);
@@ -127,6 +122,21 @@ const Questions = () => {
     []
   );
 
+  const contextActions = React.useMemo(() => {
+    const showSelectedRows = () => console.log(selectedRows);
+
+    return (
+      <Button
+        color='primary'
+        onClick={showSelectedRows}
+        style={{ marginRight: '0' }}
+      >
+        Add To Quiz
+      </Button>
+    );
+    // eslint-disable-next-line
+  }, [selectedRows]);
+
   return (
     <>
       <DataTable
@@ -146,9 +156,11 @@ const Questions = () => {
         expandOnRowClicked
         expandableRowsComponent={<Question />}
         selectableRows
+        selectableRowsHighlight
         highlightOnHover
         onSelectedRowsChange={onSelectedRowsChangeHandler}
         actions={actions}
+        contextActions={contextActions}
       />
     </>
   );

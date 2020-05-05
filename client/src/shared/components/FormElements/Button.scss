@@ -4,6 +4,7 @@
 .button {
   // Default styles
   @include button-state-colors($color-black);
+  transition: all 0.2s;
 
   &,
   &:link,
@@ -45,6 +46,10 @@
     border-radius: 10rem;
   }
 
+  &--round {
+    border-radius: 50%;
+  }
+
   // Button look
   &--block {
     display: block;
@@ -54,6 +59,12 @@
   // Button colors
   &--primary {
     @include button-state-colors($color-primary);
+
+    &:not(.button--cta):hover {
+      background-color: $color-secondary;
+      border-color: $color-secondary;
+      color: $color-primary-dark;
+    }
   }
 
   &--success {

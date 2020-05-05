@@ -10,6 +10,7 @@ import Login from './auth/pages/Login';
 import Register from './auth/pages/Register';
 import useAuth from './hooks/useAuth';
 import SubmitQuestion from './question/pages/SubmitQuestion';
+import QuizPage from './quiz/pages/QuizPage';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import PrivateRoute from './shared/components/Routing/PrivateRoute';
 import Alerts from './shared/components/UIElements/Alerts';
@@ -40,6 +41,12 @@ const App = () => {
               exact
               path='/questions/new'
               component={SubmitQuestion}
+            />
+            <PrivateRoute
+              exact
+              path='/quizzes/:quizId'
+              roles='QUIZ_MASTER'
+              component={QuizPage}
             />
             <Redirect to='/' />
           </Switch>
