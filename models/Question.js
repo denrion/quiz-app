@@ -121,7 +121,7 @@ QuestionSchema.pre('validate', function (next) {
 
 QuestionSchema.pre(/^find/, function (next) {
   this.populate({
-    path: 'user',
+    path: 'submittedBy',
     select: 'displayName',
   });
 

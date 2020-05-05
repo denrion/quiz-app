@@ -2,10 +2,11 @@ import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { AlertContext } from '../../context/alert/AlertProvider';
 import { AuthContext } from '../../context/auth/AuthProvider';
+import useAuth from '../../hooks/useAuth';
 import Button from '../../shared/components/FormElements/Button';
 
 const Register = ({ history }) => {
-  const { registerUser, error, clearErrors, isAuthenticated } = useContext(
+  const { registerUser, error, clearErrors, isAuthenticated } = useAuth(
     AuthContext
   );
   const { setAlert } = useContext(AlertContext);

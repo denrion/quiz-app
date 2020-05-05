@@ -1,0 +1,55 @@
+@import '../../../sass/variables';
+
+.alert {
+  padding: 1rem 1.5rem;
+  margin: 1rem;
+  opacity: 0.9;
+  background: $color-light;
+  color: $color-dark;
+  max-width: max-content;
+  border-radius: 4px;
+  position: absolute;
+  top: 7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: moveInTop 1s;
+
+  &-primary {
+    background: $color-primary;
+  }
+
+  &-danger {
+    background: $color-danger;
+  }
+
+  &-success {
+    background: $color-success;
+  }
+
+  &-light {
+    background: $color-light;
+    color: $color-dark;
+  }
+
+  &-dark {
+    background: $color-dark;
+  }
+
+  &-primary,
+  &-danger,
+  &-success,
+  &-light,
+  &-dark {
+    color: $color-white;
+  }
+}
+
+@keyframes moveInTop {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

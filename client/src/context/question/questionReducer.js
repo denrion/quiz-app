@@ -1,22 +1,26 @@
 import { SET_LOADING } from '../shared/sharedTypes';
-import { CREATE_QUIZ, GET_QUIZZES, QUIZ_ERROR } from './quizTypes';
+import {
+  GET_QUESTIONS,
+  QUESTION_ERROR,
+  SUBMIT_QUESTION,
+} from './questionTypes';
 
-const quizReducer = (state, action) => {
+const questionReducer = (state, action) => {
   switch (action.type) {
-    case GET_QUIZZES:
+    case GET_QUESTIONS:
       return {
         ...state,
-        quizzes: action.payload.data.quizzes,
+        questions: action.payload.data.questions,
         totalResults: action.payload.totalResults,
         loading: false,
       };
-    case CREATE_QUIZ:
+    case SUBMIT_QUESTION:
       return {
         ...state,
-        quizzes: [...state.quizzes, action.payload],
+        questions: [...state.questions, action.payload],
         loading: false,
       };
-    case QUIZ_ERROR:
+    case QUESTION_ERROR:
       return {
         ...state,
         loading: false,
@@ -32,4 +36,4 @@ const quizReducer = (state, action) => {
   }
 };
 
-export default quizReducer;
+export default questionReducer;

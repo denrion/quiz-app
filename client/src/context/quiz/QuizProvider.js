@@ -1,12 +1,12 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
 import API from '../../utils/API';
-import { AlertContext } from '../alert/AlertProvider';
-import { SET_LOADING } from '../sharedTypes';
+import { setLoading } from '../shared/sharedActions';
+import {} from '../shared/sharedTypes';
 import quizReducer from './quizReducer';
-import { GET_QUESTIONS, QUESTION_ERROR, SUBMIT_QUESTION } from './quizTypes';
+import { CREATE_QUIZ, GET_QUIZZES, QUIZ_ERROR } from './quizTypes';
 
 const INITIAL_STATE = {
-  questions: [],
+  quizzes: [],
   totalResults: 10,
   error: null,
   loading: false,
@@ -14,70 +14,56 @@ const INITIAL_STATE = {
 
 const CONTEXT_STATE = {
   ...INITIAL_STATE,
-  getQuestions: (page = 1, limit = 10, sort = '-createdAt') => {},
-  submitQuestion: (formData) => {},
+  getQuizzes: (page = 1, limit = 10, sort = '-createdAt') => {},
+  createQuiz: (formData) => {},
 };
 
 export const QuizContext = createContext(CONTEXT_STATE);
 
 export const QuizProvider = ({ children }) => {
-  const { setAlert } = useContext(AlertContext);
   const [state, dispatch] = useReducer(quizReducer, INITIAL_STATE);
 
-  const getQuestions = async (page = 1, limit = 10, sort = '-createdAt') => {
+  const getQuizzes = async (page = 1, limit = 10, sort = '-createdAt') => {
     try {
-      setLoading();
+      setLoading(dispatch);
 
       const response = await API.get(
-        `questions?page=${page}&limit=${limit}&sort=${sort}`
+        `quizzes?page=${page}&limit=${limit}&sort=${sort}`
       );
 
       dispatch({
-        type: GET_QUESTIONS,
+        type: GET_QUIZZES,
         payload: response.data,
       });
     } catch (error) {
       dispatch({
-        type: QUESTION_ERROR,
+        type: QUIZ_ERROR,
         payload: error.response.data.message,
       });
     }
   };
 
-  const submitQuestion = async (formData) => {
+  const createQuiz = async (formData) => {
     try {
-      setLoading();
+      setLoading(dispatch);
 
-      const response = await API.post('questions', formData);
+      const response = await API.post('quizzes', formData);
 
-      dispatch({ type: SUBMIT_QUESTION, payload: response.data.data });
-
-      setAlert(
-        'Your question was submitted succesfully. Thank you :)',
-        'success',
-        3000
-      );
+      dispatch({ type: CREATE_QUIZ, payload: response.data.data });
     } catch (error) {
       dispatch({
-        type: QUESTION_ERROR,
+        type: QUIZ_ERROR,
         payload: error.response.data.message,
       });
-      setAlert(
-        'Your question was not submitted succesfully. Please try again!',
-        'danger',
-        3000
-      );
     }
   };
-
-  const setLoading = () => dispatch({ type: SET_LOADING });
 
   return (
     <QuizContext.Provider
       value={{
         ...state,
-        getQuestions,
-        submitQuestion,
+        getQuizzes,
+        createQuiz,
       }}
     >
       {children}

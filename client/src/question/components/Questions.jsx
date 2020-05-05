@@ -6,14 +6,14 @@ import React, {
   useState,
 } from 'react';
 import DataTable, { defaultThemes } from 'react-data-table-component';
-import { QuizContext } from '../../context/quiz/QuizProvider';
+import { QuestionContext } from '../../context/question/QuestionProvider';
 import Button from '../../shared/components/FormElements/Button';
 import Spinner from '../../shared/components/UIElements/Spinner';
 import Question from './Question';
 
 const Questions = () => {
   const { getQuestions, loading, questions, totalResults } = useContext(
-    QuizContext
+    QuestionContext
   );
 
   const [selectedRows, setSelectedRows] = useState([]);
@@ -59,7 +59,7 @@ const Questions = () => {
       },
       {
         name: 'Submitted By',
-        selector: 'user.displayName',
+        selector: 'submittedBy.displayName',
         sortable: true,
         center: true,
       },

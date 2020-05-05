@@ -1,7 +1,14 @@
 import React from 'react';
 
 const Question = (data) => {
-  const { id, type, category, user, createdAt, ...questionData } = data.data;
+  const {
+    id,
+    type,
+    category,
+    submittedBy,
+    createdAt,
+    ...questionData
+  } = data.data;
 
   return (
     <div style={{ marginLeft: '100px' }}>

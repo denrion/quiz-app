@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { QuizContext } from '../../context/quiz/QuizProvider';
+import { QuestionContext } from '../../context/question/QuestionProvider';
 import Button from '../../shared/components/FormElements/Button';
 import { QUESTION_CATEGORIES, QUESTION_TYPES } from '../components/constants';
 
 const SubmitQuestion = () => {
-  const { submitQuestion } = useContext(QuizContext);
+  const { submitQuestion } = useContext(QuestionContext);
 
   const { register, handleSubmit, watch, errors, reset, getValues } = useForm();
   const questionType = watch('type');
