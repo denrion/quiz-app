@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import API from '../../utils/API';
 import { AlertContext } from '../alert/AlertProvider';
+import { SET_LOADING } from '../sharedTypes';
 import quizReducer from './quizReducer';
 import { GET_QUESTIONS, QUESTION_ERROR, SUBMIT_QUESTION } from './quizTypes';
 
@@ -8,7 +9,7 @@ const INITIAL_STATE = {
   questions: [],
   totalResults: 10,
   error: null,
-  loading: true,
+  loading: false,
 };
 
 const CONTEXT_STATE = {
@@ -25,6 +26,8 @@ export const QuizProvider = ({ children }) => {
 
   const getQuestions = async (page = 1, limit = 10, sort = '-createdAt') => {
     try {
+      setLoading();
+
       const response = await API.get(
         `questions?page=${page}&limit=${limit}&sort=${sort}`
       );
@@ -43,6 +46,8 @@ export const QuizProvider = ({ children }) => {
 
   const submitQuestion = async (formData) => {
     try {
+      setLoading();
+
       const response = await API.post('questions', formData);
 
       dispatch({ type: SUBMIT_QUESTION, payload: response.data.data });
@@ -64,6 +69,8 @@ export const QuizProvider = ({ children }) => {
       );
     }
   };
+
+  const setLoading = () => dispatch({ type: SET_LOADING });
 
   return (
     <QuizContext.Provider

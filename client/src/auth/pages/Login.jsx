@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Redirect } from 'react-router-dom';
 import { AlertContext } from '../../context/alert/AlertProvider';
 import useAuth from '../../hooks/useAuth';
+import Button from '../../shared/components/FormElements/Button';
 
 const Login = (props) => {
   const { loginUser, isAuthenticated, error, clearErrors } = useAuth();
@@ -76,12 +77,17 @@ const Login = (props) => {
             <span className='is-error'>{errors.password.message}</span>
           )}
         </div>
-        <button
+        <Button
           type='submit'
-          className='btn btn--primary btn--block btn--big btn--round btn--animated my-3'
+          color='primary'
+          shape='rounded'
+          size='big'
+          display='block'
+          effect='animate'
+          className='my-3'
         >
           Login
-        </button>
+        </Button>
       </form>
     </div>
   );

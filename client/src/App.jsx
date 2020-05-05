@@ -13,7 +13,7 @@ import SubmitQuestion from './question/pages/SubmitQuestion';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import PrivateRoute from './shared/components/Routing/PrivateRoute';
 import Alerts from './shared/components/UIElements/Alerts';
-import FullPageSpinner from './shared/components/UIElements/FullPageSpinner';
+import Spinner from './shared/components/UIElements/Spinner';
 import Home from './shared/pages/Home';
 
 const App = () => {
@@ -24,12 +24,11 @@ const App = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (loading) return <FullPageSpinner />;
+  if (loading) return <Spinner />;
 
   return (
     <Router>
       <MainNavigation />
-      {/* <Navbar /> */}
       <main>
         <div className='container'>
           <Alerts />

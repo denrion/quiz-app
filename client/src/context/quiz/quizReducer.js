@@ -1,3 +1,4 @@
+import { SET_LOADING } from '../sharedTypes';
 import { GET_QUESTIONS, QUESTION_ERROR, SUBMIT_QUESTION } from './quizTypes';
 
 const quizReducer = (state, action) => {
@@ -20,6 +21,11 @@ const quizReducer = (state, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;

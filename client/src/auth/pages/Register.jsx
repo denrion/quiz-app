@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { AlertContext } from '../../context/alert/AlertProvider';
 import { AuthContext } from '../../context/auth/AuthProvider';
+import Button from '../../shared/components/FormElements/Button';
 
 const Register = ({ history }) => {
   const { registerUser, error, clearErrors, isAuthenticated } = useContext(
@@ -125,9 +126,17 @@ const Register = ({ history }) => {
             <span className='is-error'>{errors.passwordConfirm.message}</span>
           )}
         </div>
-        <button type='submit' className='btn btn--primary btn--block my-3'>
+        <Button
+          type='submit'
+          color='primary'
+          shape='rounded'
+          size='big'
+          display='block'
+          effect='animate'
+          className='my-3'
+        >
           Register
-        </button>
+        </Button>
       </form>
     </div>
   );

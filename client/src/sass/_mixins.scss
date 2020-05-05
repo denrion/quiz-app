@@ -1,0 +1,34 @@
+@function set-flash-text-color($color: nth($status, 1)) {
+  @if (lightness($color) > 50) {
+    @return $color-dark; // Lighter background, return dark color
+  } @else {
+    @return $color-white; // Darker background, return light color
+  }
+}
+
+@mixin button-state-colors($color) {
+  background-color: $color;
+  border-color: $color;
+  color: set-flash-text-color($color);
+
+  &:hover,
+  &:active {
+    opacity: 0.92;
+  }
+
+  &::after {
+    background-color: $color;
+  }
+
+  &.button--inverse {
+    background: transparent;
+    color: $color;
+
+    &:hover,
+    &:active {
+      color: set-flash-text-color($color);
+      background: $color;
+      border-color: $color;
+    }
+  }
+}
