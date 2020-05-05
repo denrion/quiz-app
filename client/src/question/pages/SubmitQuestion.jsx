@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { QuizContext } from '../../context/quiz/QuizProvider';
+import Button from '../../shared/components/FormElements/Button';
 import { QUESTION_CATEGORIES, QUESTION_TYPES } from '../components/constants';
 
 const SubmitQuestion = () => {
@@ -206,9 +207,17 @@ const SubmitQuestion = () => {
         )}
 
         <div className='center'>
-          <button type='submit' className='btn btn--primary my-3'>
+          <Button
+            type='submit'
+            shape='rounded'
+            color='primary'
+            effect='cta'
+            display='block'
+            size='big'
+            className='my-3'
+          >
             Submit
-          </button>
+          </Button>
         </div>
       </form>
     </>

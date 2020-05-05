@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import DataTable, { defaultThemes } from 'react-data-table-component';
 import { QuizContext } from '../../context/quiz/QuizProvider';
+import Button from '../../shared/components/FormElements/Button';
 import Spinner from '../../shared/components/UIElements/Spinner';
 import Question from './Question';
 
@@ -23,9 +24,9 @@ const Questions = () => {
     // eslint-disable-next-line
   }, [selectedRows]);
 
-  const onAddHandler = useCallback(() => {
-    alert('Add question - not implemented yet');
-  }, []);
+  // const onAddHandler = useCallback(() => {
+  //   alert('Add question - not implemented yet');
+  // }, []);
 
   const onDeleteHandler = useCallback((id) => {
     alert(`Delete question (id: ${id}) - not implemented yet`);
@@ -36,14 +37,14 @@ const Questions = () => {
   }, []);
 
   const actions = (
-    <button
+    <Button
       key='add'
-      className='btn btn--primary'
+      color='primary'
       style={{ marginRight: '0' }}
-      onClick={onAddHandler}
+      to='/questions/new'
     >
       Add Question
-    </button>
+    </Button>
   );
 
   const columns = useMemo(
@@ -80,18 +81,20 @@ const Questions = () => {
         button: true,
         cell: (row) => (
           <div className='center'>
-            <button
-              className='btn btn--small btn--warning'
+            <Button
+              size='small'
+              color='warning'
               onClick={() => onEditHandler(row.id)}
             >
-              E
-            </button>
-            <button
-              className='btn btn--small btn--danger'
+              <i className='fas fa-edit'></i>
+            </Button>
+            <Button
+              size='small'
+              color='danger'
               onClick={() => onDeleteHandler(row.id)}
             >
-              D
-            </button>
+              <i className='far fa-trash-alt'></i>
+            </Button>
           </div>
         ),
       },
