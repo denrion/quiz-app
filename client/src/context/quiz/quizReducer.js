@@ -1,5 +1,10 @@
 import { SET_LOADING } from '../shared/sharedTypes';
-import { CREATE_QUIZ, GET_QUIZZES, QUIZ_ERROR } from './quizTypes';
+import {
+  ADD_QUESTION_TO_QUIZ,
+  CREATE_QUIZ,
+  GET_QUIZZES,
+  QUIZ_ERROR,
+} from './quizTypes';
 
 const quizReducer = (state, action) => {
   switch (action.type) {
@@ -13,7 +18,15 @@ const quizReducer = (state, action) => {
     case CREATE_QUIZ:
       return {
         ...state,
-        quizzes: [...state.quizzes, action.payload],
+        quizzes: [action.payload, ...state.quizzes],
+        loading: false,
+      };
+    case ADD_QUESTION_TO_QUIZ:
+      return {
+        ...state,
+        quizzes: state.quizzes.map((quiz) =>
+          quiz.id === action.payload.id ? action.payload : quiz
+        ),
         loading: false,
       };
     case QUIZ_ERROR:

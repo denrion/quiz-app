@@ -3,10 +3,16 @@ import API from '../../utils/API';
 import { setLoading } from '../shared/sharedActions';
 import {} from '../shared/sharedTypes';
 import quizReducer from './quizReducer';
-import { CREATE_QUIZ, GET_QUIZZES, QUIZ_ERROR } from './quizTypes';
+import {
+  ADD_QUESTION_TO_QUIZ,
+  CREATE_QUIZ,
+  GET_QUIZZES,
+  QUIZ_ERROR,
+} from './quizTypes';
 
 const INITIAL_STATE = {
-  quizzes: [],
+  quizzes: null,
+  currentQuiz: null,
   totalResults: 10,
   error: null,
   loading: false,
@@ -16,6 +22,7 @@ const CONTEXT_STATE = {
   ...INITIAL_STATE,
   getQuizzes: (field, page = 1, limit = 10, sort = '-createdAt') => {},
   createQuiz: (formData) => {},
+  addQuestionsToQuiz: (quizId, questions) => {},
 };
 
 export const QuizContext = createContext(CONTEXT_STATE);
@@ -53,10 +60,26 @@ export const QuizProvider = ({ children }) => {
   const createQuiz = async (formData) => {
     try {
       setLoading(dispatch);
-
       const response = await API.post('quizzes', formData);
+      dispatch({ type: CREATE_QUIZ, payload: response.data.data.quiz });
+    } catch (error) {
+      dispatch({
+        type: QUIZ_ERROR,
+        payload: error.response.data.message,
+      });
+    }
+  };
 
-      dispatch({ type: CREATE_QUIZ, payload: response.data.data });
+  const addQuestionsToQuiz = async (quizId, questions) => {
+    try {
+      setLoading(dispatch);
+      const response = await API.post(`quizzes/${quizId}/questions`, questions);
+
+      console.log(response);
+      dispatch({
+        type: ADD_QUESTION_TO_QUIZ,
+        payload: response.data.data.quiz,
+      });
     } catch (error) {
       dispatch({
         type: QUIZ_ERROR,
@@ -71,6 +94,7 @@ export const QuizProvider = ({ children }) => {
         ...state,
         getQuizzes,
         createQuiz,
+        addQuestionsToQuiz,
       }}
     >
       {children}

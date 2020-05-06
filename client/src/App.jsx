@@ -14,7 +14,7 @@ import QuizPage from './quiz/pages/QuizPage';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import PrivateRoute from './shared/components/Routing/PrivateRoute';
 import Alerts from './shared/components/UIElements/Alerts';
-import Spinner from './shared/components/UIElements/Spinner';
+import FullPageSpinner from './shared/components/UIElements/FullPageSpinner';
 import Home from './shared/pages/Home';
 
 const App = () => {
@@ -25,7 +25,7 @@ const App = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (loading) return <Spinner />;
+  if (loading) return <FullPageSpinner />;
 
   return (
     <Router>

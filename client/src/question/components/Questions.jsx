@@ -6,15 +6,19 @@ import React, {
   useState,
 } from 'react';
 import DataTable, { defaultThemes } from 'react-data-table-component';
+import { useForm } from 'react-hook-form';
 import { QuestionContext } from '../../context/question/QuestionProvider';
+import { QuizContext } from '../../context/quiz/QuizProvider';
 import Button from '../../shared/components/FormElements/Button';
 import Spinner from '../../shared/components/UIElements/Spinner';
 import Question from './Question';
 
 const Questions = () => {
+  const { quizzes, addQuestionsToQuiz } = useContext(QuizContext);
   const { getQuestions, loading, questions, totalResults } = useContext(
     QuestionContext
   );
+  const { register, handleSubmit } = useForm();
 
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -123,16 +127,37 @@ const Questions = () => {
   );
 
   const contextActions = React.useMemo(() => {
-    const showSelectedRows = () => console.log(selectedRows);
+    const onSubmitHandler = (formData) => {
+      const selectedQuizIds = selectedRows.map((quiz) => quiz.id);
+      addQuestionsToQuiz(formData.quiz, selectedQuizIds);
+    };
 
     return (
-      <Button
-        color='primary'
-        onClick={showSelectedRows}
-        style={{ marginRight: '0' }}
+      <form
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+        onSubmit={handleSubmit(onSubmitHandler)}
       >
-        Add To Quiz
-      </Button>
+        <select name='quiz' id='quiz' ref={register}>
+          {quizzes &&
+            quizzes.map((quiz) => (
+              <option key={quiz.id} value={quiz.id}>
+                {quiz.name}
+              </option>
+            ))}
+        </select>
+        <Button
+          type='submit'
+          color='primary'
+          style={{ marginRight: '0', padding: '1px' }}
+          size='small'
+          className='m-1'
+        >
+          Add To Quiz
+        </Button>
+      </form>
     );
     // eslint-disable-next-line
   }, [selectedRows]);

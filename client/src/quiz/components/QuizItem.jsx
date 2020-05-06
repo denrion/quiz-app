@@ -13,7 +13,6 @@ const QuizItem = ({ quiz }) => {
             <h2>{quiz.name}</h2>
             <p>Questions: {quiz.questions.length}</p>
             <p>Participants: {quiz.participants.length}</p>
-            <p>Quizmaster: {quiz.quizmaster.displayName}</p>
           </div>
         </Link>
       </Card>

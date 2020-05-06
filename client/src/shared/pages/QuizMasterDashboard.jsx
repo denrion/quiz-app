@@ -5,11 +5,13 @@ import QuizzesList from '../../quiz/components/QuizzesList';
 const QuizMasterDashboard = () => {
   return (
     <>
-      <h1 className='text-center my-2'>Quizzes</h1>
-      <QuizzesList />
+      <section className='my-3'>
+        <QuizzesList />
+      </section>
 
-      <h1 className='text-center my-2'>Questions</h1>
-      <Questions />
+      <section className='my-3'>
+        <Questions />
+      </section>
     </>
   );
 };

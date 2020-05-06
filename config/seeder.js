@@ -4,9 +4,11 @@ const colors = require('colors');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const connectMongoDB = require('./connectMongoDB');
+
 const User = require('../models/User');
 const Question = require('../models/Question');
-const connectMongoDB = require('./connectMongoDB');
+const Quiz = require('../models/Quiz');
 
 connectMongoDB();
 
@@ -34,6 +36,7 @@ const deleteData = async () => {
   try {
     await User.deleteMany({});
     await Question.deleteMany({});
+    await Quiz.deleteMany({});
     console.log(colors.red.inverse('Data successfuly deleted'));
     process.exit();
   } catch (error) {

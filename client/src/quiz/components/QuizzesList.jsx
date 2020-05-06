@@ -1,17 +1,21 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { QuizContext } from '../../context/quiz/QuizProvider';
 import useAuth from '../../hooks/useAuth';
 import Button from '../../shared/components/FormElements/Button';
 import Spinner from '../../shared/components/UIElements/Spinner';
 import QuizItem from './QuizItem';
 import './QuizzesList.scss';
+import QuizzModalForm from './QuizzModalForm';
 
 const QuizzesList = () => {
   const { user } = useAuth();
   const { getQuizzes, loading, quizzes } = useContext(QuizContext);
 
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => setShowModal(!showModal);
+
   useEffect(() => {
-    if (quizzes.length === 0)
+    if (!quizzes)
       getQuizzes({
         fieldName: 'quizmaster',
         value: user.id,
@@ -20,23 +24,31 @@ const QuizzesList = () => {
     // eslint-disable-next-line
   }, []);
 
-  const onCreateQuizHandler = () => alert('Create Quiz');
-
   if (loading) return <Spinner />;
 
   return (
-    <ul className='quizzes-list'>
-      {quizzes && quizzes.map((quiz) => <QuizItem key={quiz.id} quiz={quiz} />)}
-      <Button
-        size='small'
-        color='primary'
-        shape='round'
-        className='quizzes-list-add'
-        onClick={onCreateQuizHandler}
-      >
-        <i className='fas fa-plus' />
-      </Button>
-    </ul>
+    <>
+      <QuizzModalForm showModal={showModal} toggleModal={toggleModal} />
+
+      <ul className='quizzes-list'>
+        <Button
+          size='small'
+          color='primary'
+          shape='round'
+          className='quizzes-list-add'
+          onClick={toggleModal}
+        >
+          <i className='fas fa-plus' />
+        </Button>
+
+        {quizzes && quizzes.length === 0 && (
+          <h4 className='center'>No quizzes to show. Please create one.</h4>
+        )}
+
+        {quizzes &&
+          quizzes.map((quiz) => <QuizItem key={quiz.id} quiz={quiz} />)}
+      </ul>
+    </>
   );
 };
 

@@ -54,7 +54,7 @@ export const QuestionProvider = ({ children }) => {
 
       const response = await API.post('questions', formData);
 
-      dispatch({ type: SUBMIT_QUESTION, payload: response.data.data });
+      dispatch({ type: SUBMIT_QUESTION, payload: response.data.data.question });
 
       setAlert(
         'Your question was submitted succesfully. Thank you :)',

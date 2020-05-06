@@ -134,4 +134,5 @@ QuestionSchema.pre(/^find/, function (next) {
 
 QuestionSchema.plugin(sanitizeMongoFields);
 
+exports.QuestionSchema;
 module.exports = mongoose.model('Question', QuestionSchema);

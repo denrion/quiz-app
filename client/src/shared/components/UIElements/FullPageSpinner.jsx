@@ -4,7 +4,8 @@ import './Spinner.scss';
 const Spinner = () => (
   <div
     style={{
-      margin: 'auto',
+      fontSize: '4rem',
+      height: '100vh',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',

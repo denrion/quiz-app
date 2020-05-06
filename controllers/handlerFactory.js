@@ -4,7 +4,6 @@ const lowercaseFirstLetter = require('../utils/helpers/lowercaseFirstLetter');
 const setCorrectPluralEnding = require('../utils/helpers/setCorrectPluralEnding');
 const catchAsync = require('../utils/catchAsync');
 const APIFeatures = require('../utils/APIFeatures');
-const Quiz = require('../models/Quiz');
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
