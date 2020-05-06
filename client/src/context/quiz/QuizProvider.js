@@ -1,14 +1,9 @@
-import React, { createContext, useReducer } from 'react';
+import { createContext, useReducer } from 'react';
 import API from '../../utils/API';
 import { setLoading } from '../shared/sharedActions';
 import {} from '../shared/sharedTypes';
 import quizReducer from './quizReducer';
-import {
-  ADD_QUESTION_TO_QUIZ,
-  CREATE_QUIZ,
-  GET_QUIZZES,
-  QUIZ_ERROR,
-} from './quizTypes';
+import { GET_QUIZZES, QUIZ_ERROR } from './quizTypes';
 
 const INITIAL_STATE = {
   quizzes: null,
@@ -39,9 +34,8 @@ export const QuizProvider = ({ children }) => {
     try {
       setLoading(dispatch);
 
-      const url = `quizzes?${
-        field && `${field.fieldName}=${field.value}`
-      }&page=${page}&limit=${limit}&sort=${sort}`;
+      const fieldString = field && `${field.fieldName}=${field.value}`;
+      const url = `quizzes?${fieldString}&page=${page}&limit=${limit}&sort=${sort}`;
 
       const response = await API.get(url);
 
@@ -73,9 +67,9 @@ export const QuizProvider = ({ children }) => {
   const addQuestionsToQuiz = async (quizId, questions) => {
     try {
       setLoading(dispatch);
+
       const response = await API.post(`quizzes/${quizId}/questions`, questions);
 
-      console.log(response);
       dispatch({
         type: ADD_QUESTION_TO_QUIZ,
         payload: response.data.data.quiz,
@@ -86,18 +80,18 @@ export const QuizProvider = ({ children }) => {
         payload: error.response.data.message,
       });
     }
-  };
 
-  return (
-    <QuizContext.Provider
-      value={{
-        ...state,
-        getQuizzes,
-        createQuiz,
-        addQuestionsToQuiz,
-      }}
-    >
-      {children}
-    </QuizContext.Provider>
-  );
+    return (
+      <QuizContext.Provider
+        value={{
+          ...state,
+          getQuizzes,
+          createQuiz,
+          addQuestionsToQuiz,
+        }}
+      >
+        {children}
+      </QuizContext.Provider>
+    );
+  };
 };
