@@ -5,7 +5,7 @@ const {
   createQuestion,
   getAllQuestions,
 } = require('../controllers/questionController');
-const setFieldFromRequest = require('../middleware/setFieldFromRequest');
+const { setFieldFromRequest } = require('../middleware/setFieldFromRequest');
 
 const router = express.Router();
 

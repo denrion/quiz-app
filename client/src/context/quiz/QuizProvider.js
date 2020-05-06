@@ -14,7 +14,7 @@ const INITIAL_STATE = {
 
 const CONTEXT_STATE = {
   ...INITIAL_STATE,
-  getQuizzes: (page = 1, limit = 10, sort = '-createdAt') => {},
+  getQuizzes: (field, page = 1, limit = 10, sort = '-createdAt') => {},
   createQuiz: (formData) => {},
 };
 
@@ -23,13 +23,20 @@ export const QuizContext = createContext(CONTEXT_STATE);
 export const QuizProvider = ({ children }) => {
   const [state, dispatch] = useReducer(quizReducer, INITIAL_STATE);
 
-  const getQuizzes = async (page = 1, limit = 10, sort = '-createdAt') => {
+  const getQuizzes = async (
+    field,
+    page = 1,
+    limit = 10,
+    sort = '-createdAt'
+  ) => {
     try {
       setLoading(dispatch);
 
-      const response = await API.get(
-        `quizzes?page=${page}&limit=${limit}&sort=${sort}`
-      );
+      const url = `quizzes?${
+        field && `${field.fieldName}=${field.value}`
+      }&page=${page}&limit=${limit}&sort=${sort}`;
+
+      const response = await API.get(url);
 
       dispatch({
         type: GET_QUIZZES,

@@ -19,7 +19,7 @@ const Questions = () => {
   const [selectedRows, setSelectedRows] = useState([]);
 
   useEffect(() => {
-    getQuestions();
+    if (questions.length === 0) getQuestions();
     // eslint-disable-next-line
   }, []);
 

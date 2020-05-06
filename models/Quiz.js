@@ -23,6 +23,7 @@ const QuizSchema = new mongoose.Schema(
     quizmaster: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
+      required: [true, 'Quiz must belong to a quizmaster'],
     },
   },
   {
@@ -34,6 +35,14 @@ const QuizSchema = new mongoose.Schema(
 // ************************ VIRTUALS ************************ //
 
 // ************************ DOCUMENT MIDDLEWARE ************************ //
+QuizSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'quizmaster',
+    select: 'displayName username',
+  });
+
+  next();
+});
 
 // ************************ INSTANCE METHODS ************************ //
 

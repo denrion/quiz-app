@@ -21,16 +21,11 @@
   a:hover,
   a:active {
     background: $color-secondary;
+    color: $color-dark;
   }
 
   &__content {
     padding: 0;
-  }
-
-  &__image {
-    width: 4rem;
-    height: 4rem;
-    margin-right: 1rem;
   }
 
   &__info {
@@ -48,11 +43,7 @@
   }
 
   &:hover h2,
-  &:active h2,
-  &:hover h3,
-  &:active h3,
-  &:hover p,
-  &:active p {
+  &:active h2 {
     color: $color-dark;
   }
 }
