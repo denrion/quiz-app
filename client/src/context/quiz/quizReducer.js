@@ -1,5 +1,6 @@
 import { SET_LOADING } from '../shared/sharedTypes';
 import {
+  ADD_PARTICIPANT_TO_QUIZ,
   ADD_QUESTION_TO_QUIZ,
   CREATE_QUIZ,
   GET_QUIZ,
@@ -35,6 +36,16 @@ const quizReducer = (state, action) => {
         quizzes: state.quizzes.map((quiz) =>
           quiz.id === action.payload.id ? action.payload : quiz
         ),
+        loading: false,
+      };
+    case ADD_PARTICIPANT_TO_QUIZ:
+      console.log(action.payload);
+      return {
+        ...state,
+        quiz: {
+          ...state.quiz,
+          participants: action.payload.participants,
+        },
         loading: false,
       };
     case SET_ACTIVE_QUESTION:

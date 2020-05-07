@@ -6,6 +6,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const NotImplementedError = require('./utils/errors/AppError');
 
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 const questionRoutes = require('./routes/questionRoutes');
 const quizRoutes = require('./routes/quizRoutes');
 
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // 2) ROUTES
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/questions', questionRoutes);
 app.use('/api/v1/quizzes', quizRoutes);
 

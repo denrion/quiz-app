@@ -5,7 +5,8 @@ const {
   createQuiz,
   getAllQuizzes,
   getQuiz,
-  addTransactionToFinancialReport,
+  addQuestionsToQuiz,
+  addParticipantsToQuiz,
 } = require('../controllers/quizController');
 const { setFieldFromRequest } = require('../middleware/setFieldFromRequest');
 
@@ -20,6 +21,7 @@ router
 
 router.route('/:id').get(getQuiz).patch().delete();
 
-router.route('/:quizId/questions').post(addTransactionToFinancialReport);
+router.route('/:quizId/questions').post(addQuestionsToQuiz);
+router.route('/:quizId/users').post(addParticipantsToQuiz);
 
 module.exports = router;

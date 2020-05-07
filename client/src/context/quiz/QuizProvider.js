@@ -4,6 +4,7 @@ import { setLoading } from '../shared/sharedActions';
 import {} from '../shared/sharedTypes';
 import quizReducer from './quizReducer';
 import {
+  ADD_PARTICIPANT_TO_QUIZ,
   ADD_QUESTION_TO_QUIZ,
   CREATE_QUIZ,
   GET_QUIZ,
@@ -27,6 +28,7 @@ const CONTEXT_STATE = {
   getQuiz: (quizId) => {},
   createQuiz: (formData) => {},
   addQuestionsToQuiz: (quizId, questions) => {},
+  addParticipantsToQuiz: (quizId, participants) => {},
   setActiveQuestion: (question) => {},
 };
 
@@ -107,6 +109,24 @@ export const QuizProvider = ({ children }) => {
     }
   };
 
+  const addParticipantsToQuiz = async (quizId, participants) => {
+    try {
+      setLoading(dispatch);
+
+      const response = await API.post(`quizzes/${quizId}/users`, participants);
+
+      dispatch({
+        type: ADD_PARTICIPANT_TO_QUIZ,
+        payload: response.data.data.quiz,
+      });
+    } catch (error) {
+      dispatch({
+        type: QUIZ_ERROR,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
   const setActiveQuestion = async (question) =>
     dispatch({ type: SET_ACTIVE_QUESTION, payload: question });
 
@@ -118,6 +138,7 @@ export const QuizProvider = ({ children }) => {
         getQuiz,
         createQuiz,
         addQuestionsToQuiz,
+        addParticipantsToQuiz,
         setActiveQuestion,
       }}
     >

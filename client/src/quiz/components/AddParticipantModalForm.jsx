@@ -1,15 +1,36 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { QUESTION_CATEGORIES } from '../../question/components/constants';
+import { QuizContext } from '../../context/quiz/QuizProvider';
+import { UserContext } from '../../context/user/UserProvider';
 import Button from '../../shared/components/FormElements/Button';
 import Modal from '../../shared/components/UIElements/Modal';
 
 const AddParticipantModalForm = ({ showModal, toggleModal }) => {
+  const { getUsers, users } = useContext(UserContext);
+  const { quiz, addParticipantsToQuiz } = useContext(QuizContext);
   const { register, handleSubmit } = useForm();
 
+  useEffect(() => {
+    if (!users)
+      getUsers([
+        { fieldName: 'role', value: 'PLAYER' },
+        { fieldName: 'role', value: 'QUIZ_MASTER' },
+      ]);
+
+    // eslint-disable-next-line
+  }, []);
+
   const onSubmitHandler = (formData) => {
-    toggleModal();
+    addParticipantsToQuiz(quiz.id, formData.participants);
+    // toggleModal();
   };
+
+  const filteredUsers =
+    users &&
+    users.filter(
+      (user) =>
+        !quiz.participants.some((participant) => user.id === participant.id)
+    );
 
   return (
     <Modal
@@ -20,8 +41,13 @@ const AddParticipantModalForm = ({ showModal, toggleModal }) => {
         <>
           <Button onClick={toggleModal} color='danger' effect='inverse'>
             Cancel
-          </Button>{' '}
-          <Button type='submit' color='success' effect='inverse'>
+          </Button>
+          <Button
+            type='submit'
+            color='success'
+            effect='inverse'
+            disabled={filteredUsers && filteredUsers.length === 0}
+          >
             Submit
           </Button>
         </>
@@ -39,11 +65,12 @@ const AddParticipantModalForm = ({ showModal, toggleModal }) => {
           ref={register}
           size='10'
         >
-          {QUESTION_CATEGORIES.map((category, index) => (
-            <option key={index} value={category}>
-              {category}
-            </option>
-          ))}
+          {filteredUsers &&
+            filteredUsers.map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.displayName}
+              </option>
+            ))}
         </select>
       </div>
     </Modal>

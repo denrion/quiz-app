@@ -8,14 +8,32 @@ const status = require('http-status');
  * @desc    Add question to quiz
  * @access  Private
  */
-exports.addTransactionToFinancialReport = catchAsync(async (req, res, next) => {
-  const quiz = await Quiz.findByIdAndUpdate(
+exports.addQuestionsToQuiz = catchAsync(async (req, res, next) => {
+  const quiz = await Quiz.findById(
     req.params.quizId,
     {
       $push: { questions: req.body },
     },
     { new: true, runValidators: true }
   );
+
+  res.status(status.CREATED).json({
+    status: 'success',
+    data: { quiz },
+  });
+});
+
+/**
+ * @route   POST  /api/v1/quizzes/:quizId/participants
+ * @desc    Add participant to quiz
+ * @access  Private
+ */
+exports.addParticipantsToQuiz = catchAsync(async (req, res, next) => {
+  let quiz = await Quiz.findById(req.params.quizId);
+  quiz.participants.push(req.body);
+
+  quiz = await quiz.save();
+  quiz = await quiz.populate('participants questions').execPopulate();
 
   res.status(status.CREATED).json({
     status: 'success',

@@ -49,7 +49,7 @@ module.exports = class APIFeatures {
 
   paginate() {
     const page = +this.queryString.page || 1;
-    const limit = +this.queryString.limit || 10;
+    const limit = +this.queryString.limit || 100;
     const skip = (page - 1) * limit;
 
     if (this.queryString.page && page <= 0) {
