@@ -12,14 +12,15 @@ const { setFieldFromRequest } = require('../middleware/setFieldFromRequest');
 
 const router = express.Router();
 
+router.use(isAuth);
+
+router.route('/').get(getAllQuizzes);
+
 router.use(isAuth, restrictTo('ADMIN', 'QUIZ_MASTER'));
 
-router
-  .route('/')
-  .get(getAllQuizzes)
-  .post(setFieldFromRequest('quizmaster'), createQuiz);
-
-router.route('/:id').get(getQuiz).patch().delete();
+router.route('/').post(setFieldFromRequest('quizmaster'), createQuiz);
+router.route('/:id').get(getQuiz);
+router.route('/:id').patch().delete();
 
 router.route('/:quizId/questions').post(addQuestionsToQuiz);
 router.route('/:quizId/users').post(addParticipantsToQuiz);

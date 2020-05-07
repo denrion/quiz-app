@@ -2,7 +2,7 @@
 
 .quizzes-list {
   list-style: none;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   width: 90%;
   max-width: max-content;
@@ -10,11 +10,4 @@
   justify-content: center;
   flex-wrap: wrap;
   position: relative;
-
-  &-add {
-    position: absolute;
-    top: 50%;
-    left: -5rem;
-    transform: translateY(-50%);
-  }
 }

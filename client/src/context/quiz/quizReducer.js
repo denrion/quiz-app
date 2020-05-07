@@ -39,7 +39,6 @@ const quizReducer = (state, action) => {
         loading: false,
       };
     case ADD_PARTICIPANT_TO_QUIZ:
-      console.log(action.payload);
       return {
         ...state,
         quiz: {

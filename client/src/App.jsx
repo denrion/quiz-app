@@ -45,7 +45,7 @@ const App = () => {
             <PrivateRoute
               exact
               path='/quizzes/:quizId'
-              roles='QUIZ_MASTER'
+              roles='QUIZ_MASTER, PLAYER'
               component={QuizPage}
             />
             <Redirect to='/' />
