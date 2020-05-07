@@ -85,18 +85,18 @@ export const QuizProvider = ({ children }) => {
         payload: error.response.data.message,
       });
     }
-
-    return (
-      <QuizContext.Provider
-        value={{
-          ...state,
-          getQuizzes,
-          createQuiz,
-          addQuestionsToQuiz,
-        }}
-      >
-        {children}
-      </QuizContext.Provider>
-    );
   };
+
+  return (
+    <QuizContext.Provider
+      value={{
+        ...state,
+        getQuizzes,
+        createQuiz,
+        addQuestionsToQuiz,
+      }}
+    >
+      {children}
+    </QuizContext.Provider>
+  );
 };
