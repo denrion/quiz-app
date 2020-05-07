@@ -1,4 +1,6 @@
 export const QUIZ_ERROR = 'QUIZ_ERROR';
 export const GET_QUIZZES = 'GET_QUIZZES';
+export const GET_QUIZ = 'GET_QUIZ';
 export const CREATE_QUIZ = 'CREATE_QUIZ';
 export const ADD_QUESTION_TO_QUIZ = 'ADD_QUESTION_TO_QUIZ';
+export const SET_ACTIVE_QUESTION = 'SET_ACTIVE_QUESTION';

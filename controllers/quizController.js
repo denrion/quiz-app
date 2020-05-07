@@ -31,6 +31,15 @@ exports.addTransactionToFinancialReport = catchAsync(async (req, res, next) => {
 exports.getAllQuizzes = factory.getAll(Quiz);
 
 /**
+ * @route   GET  /api/v1/quizzes/:quizId
+ * @desc    Get Quiz
+ * @access  Private
+ */
+exports.getQuiz = factory.getOne(Quiz, {
+  path: 'questions participants',
+});
+
+/**
  * @route   POST  /api/v1/quizzes
  * @desc    Create New Quiz
  * @access  Private

@@ -4,6 +4,7 @@ const restrictTo = require('../middleware/restrictTo');
 const {
   createQuiz,
   getAllQuizzes,
+  getQuiz,
   addTransactionToFinancialReport,
 } = require('../controllers/quizController');
 const { setFieldFromRequest } = require('../middleware/setFieldFromRequest');
@@ -17,7 +18,7 @@ router
   .get(getAllQuizzes)
   .post(setFieldFromRequest('quizmaster'), createQuiz);
 
-// router.route('/:id').get().patch().delete();
+router.route('/:id').get(getQuiz).patch().delete();
 
 router.route('/:quizId/questions').post(addTransactionToFinancialReport);
 

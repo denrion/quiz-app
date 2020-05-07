@@ -2,8 +2,10 @@ import { SET_LOADING } from '../shared/sharedTypes';
 import {
   ADD_QUESTION_TO_QUIZ,
   CREATE_QUIZ,
+  GET_QUIZ,
   GET_QUIZZES,
   QUIZ_ERROR,
+  SET_ACTIVE_QUESTION,
 } from './quizTypes';
 
 const quizReducer = (state, action) => {
@@ -13,6 +15,12 @@ const quizReducer = (state, action) => {
         ...state,
         quizzes: action.payload.data.quizzes,
         totalResults: action.payload.totalResults,
+        loading: false,
+      };
+    case GET_QUIZ:
+      return {
+        ...state,
+        quiz: action.payload,
         loading: false,
       };
     case CREATE_QUIZ:
@@ -27,6 +35,12 @@ const quizReducer = (state, action) => {
         quizzes: state.quizzes.map((quiz) =>
           quiz.id === action.payload.id ? action.payload : quiz
         ),
+        loading: false,
+      };
+    case SET_ACTIVE_QUESTION:
+      return {
+        ...state,
+        activeQuestion: action.payload,
         loading: false,
       };
     case QUIZ_ERROR:

@@ -6,14 +6,17 @@ import quizReducer from './quizReducer';
 import {
   ADD_QUESTION_TO_QUIZ,
   CREATE_QUIZ,
+  GET_QUIZ,
   GET_QUIZZES,
   QUIZ_ERROR,
+  SET_ACTIVE_QUESTION,
 } from './quizTypes';
 
 const INITIAL_STATE = {
-  quizzes: null,
-  currentQuiz: null,
   totalResults: 10,
+  quizzes: null,
+  quiz: null,
+  activeQuestion: null,
   error: null,
   loading: false,
 };
@@ -21,8 +24,10 @@ const INITIAL_STATE = {
 const CONTEXT_STATE = {
   ...INITIAL_STATE,
   getQuizzes: (field, page = 1, limit = 10, sort = '-createdAt') => {},
+  getQuiz: (quizId) => {},
   createQuiz: (formData) => {},
   addQuestionsToQuiz: (quizId, questions) => {},
+  setActiveQuestion: (question) => {},
 };
 
 export const QuizContext = createContext(CONTEXT_STATE);
@@ -48,6 +53,21 @@ export const QuizProvider = ({ children }) => {
         type: GET_QUIZZES,
         payload: response.data,
       });
+    } catch (error) {
+      dispatch({
+        type: QUIZ_ERROR,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+  const getQuiz = async (quizId) => {
+    try {
+      setLoading(dispatch);
+
+      const response = await API.get(`quizzes/${quizId}`);
+
+      dispatch({ type: GET_QUIZ, payload: response.data.data.quiz });
     } catch (error) {
       dispatch({
         type: QUIZ_ERROR,
@@ -87,13 +107,18 @@ export const QuizProvider = ({ children }) => {
     }
   };
 
+  const setActiveQuestion = async (question) =>
+    dispatch({ type: SET_ACTIVE_QUESTION, payload: question });
+
   return (
     <QuizContext.Provider
       value={{
         ...state,
         getQuizzes,
+        getQuiz,
         createQuiz,
         addQuestionsToQuiz,
+        setActiveQuestion,
       }}
     >
       {children}

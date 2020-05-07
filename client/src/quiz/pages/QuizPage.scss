@@ -1,0 +1,53 @@
+@import '../../sass/variables';
+
+.quiz {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  &__active-question {
+    flex: 65%;
+    height: 40rem;
+    margin-right: 2rem;
+  }
+
+  &__questions {
+    flex: 30%;
+
+    ul {
+      list-style: none;
+      height: 40rem;
+      overflow-y: scroll;
+
+      li {
+        padding: 0.5rem;
+        border-bottom: 1px solid rgba($color-primary, 0.7);
+        font-size: 1.5rem;
+
+        &:hover {
+          background-color: $color-primary;
+          color: $color-white;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &__stats {
+    flex: 65%;
+    margin-right: 2rem;
+    height: 40rem;
+  }
+
+  &__participants {
+    flex: 30%;
+    margin-top: 2rem;
+
+    ul {
+      list-style: none;
+      height: 35rem;
+      overflow-y: scroll;
+    }
+  }
+}
