@@ -9,6 +9,10 @@ const SubmitQuestion = () => {
 
   const { register, handleSubmit, watch, errors, reset, getValues } = useForm();
   const questionType = watch('type');
+  const answerA = watch('answerA');
+  const answerB = watch('answerB');
+  const answerC = watch('answerC');
+  const answerD = watch('answerD');
 
   const onSubmitHandler = (formData) => {
     submitQuestion(formData);
@@ -189,15 +193,15 @@ const SubmitQuestion = () => {
                 className={errors.correctAnswer && 'has-error'}
                 ref={register({
                   validate: (value) =>
-                    ['A', 'B', 'C', 'D'].includes(value) ||
+                    [answerA, answerB, answerC, answerD].includes(value) ||
                     'You must choose an option',
                 })}
               >
                 <option value=''>Choose an option</option>
-                <option value={getValues().answerA}>A</option>
-                <option value={getValues().answerB}>B</option>
-                <option value={getValues().answerC}>C</option>
-                <option value={getValues().answerD}>D</option>
+                <option value={answerA}>{answerA}</option>
+                <option value={answerB}>{answerB}</option>
+                <option value={answerC}>{answerC}</option>
+                <option value={answerD}>{answerD}</option>
               </select>
               {errors.correctAnswer && (
                 <span className='is-error'>{errors.correctAnswer.message}</span>
