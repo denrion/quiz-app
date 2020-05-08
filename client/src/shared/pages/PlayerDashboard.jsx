@@ -6,7 +6,7 @@ import './PlayerDashboard.scss';
 
 const PlayerDashboard = () => {
   const { user } = useAuth();
-  const { getQuizzes, loading, quizzes } = useContext(QuizContext);
+  const { getQuizzes, quizzes } = useContext(QuizContext);
 
   useEffect(() => {
     if (!quizzes) getQuizzes({ fieldName: 'participants[in]', value: user.id });

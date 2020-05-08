@@ -27,7 +27,7 @@ const PlayerQuizPage = () => {
       socket.on('showQuestionToPlayer', (question) =>
         setActiveQuestion(question)
       );
-  }, [socket]);
+  }, [socket, setActiveQuestion]);
 
   const onSendAnswerToQuizmasterHandler = (answer) => {
     const answerForQuizMaster = { answer, user };

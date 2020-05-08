@@ -82,7 +82,10 @@ const QuizActiveQuestion = ({
   if (!activeQuestion)
     return user.role === 'PLAYER' ? (
       <h2 style={{ margin: '5rem' }}>
-        The Quizmaster is choosing a question. Please wait 😊
+        The Quizmaster is choosing a question. Please wait{' '}
+        <span role='img' aria-label='smile'>
+          😊
+        </span>
       </h2>
     ) : (
       <h2>No Question Selected</h2>
@@ -97,7 +100,10 @@ const QuizActiveQuestion = ({
           <h2>
             Unfortunatelly, you cannot answer this question because you were the
             one who submitted it. Click Submit Answer to continue. Thank you for
-            your questions ❤
+            your questions
+            <span role='img' aria-label='heart'>
+              ❤
+            </span>
           </h2>
         ) : (
           <>
