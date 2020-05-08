@@ -194,10 +194,10 @@ const SubmitQuestion = () => {
                 })}
               >
                 <option value=''>Choose an option</option>
-                <option value='A'>A</option>
-                <option value='B'>B</option>
-                <option value='C'>C</option>
-                <option value='D'>D</option>
+                <option value={getValues().answerA}>A</option>
+                <option value={getValues().answerB}>B</option>
+                <option value={getValues().answerC}>C</option>
+                <option value={getValues().answerD}>D</option>
               </select>
               {errors.correctAnswer && (
                 <span className='is-error'>{errors.correctAnswer.message}</span>

@@ -60,7 +60,8 @@
   &--primary {
     @include button-state-colors($color-primary);
 
-    &:not(.button--cta):hover {
+    &:not(.button--cta):hover,
+    &:not(.button--cta).active {
       background-color: $color-secondary;
       border-color: $color-secondary;
       color: $color-primary-dark;

@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { QuizContext } from '../../context/quiz/QuizProvider';
+import useAuth from '../../hooks/useAuth';
 import Button from '../../shared/components/FormElements/Button';
+import './QuizActiveQuestion.scss';
 
-const MultipleChoiceAnswers = ({ activeQuestion }) => {
+const MultipleChoiceAnswers = ({ activeQuestion, user, setAnswer }) => {
+  const [selectedAnswer, setSelectedAnswer] = useState();
+
+  const handleAnswer = (answer) => {
+    setSelectedAnswer(answer);
+    setAnswer(answer);
+  };
+
   return (
-    <>
+    <div className='active-question__multiple-choice'>
       <Button
         color='primary'
         size='big'
         style={{ width: '45%', margin: '1rem' }}
+        value={activeQuestion.answerA}
+        onClick={(e) => handleAnswer(e.target.value)}
+        disabled={user.role === 'QUIZ_MASTER'}
+        className={selectedAnswer === activeQuestion.answerA ? 'active' : ''}
       >
         {activeQuestion.answerA}
       </Button>
@@ -15,6 +29,10 @@ const MultipleChoiceAnswers = ({ activeQuestion }) => {
         color='primary'
         size='big'
         style={{ width: '45%', margin: '1rem' }}
+        value={activeQuestion.answerB}
+        onClick={(e) => handleAnswer(e.target.value)}
+        disabled={user.role === 'QUIZ_MASTER'}
+        className={selectedAnswer === activeQuestion.answerB ? 'active' : ''}
       >
         {activeQuestion.answerB}
       </Button>
@@ -22,6 +40,10 @@ const MultipleChoiceAnswers = ({ activeQuestion }) => {
         color='primary'
         size='big'
         style={{ width: '45%', margin: '1rem' }}
+        value={activeQuestion.answerC}
+        onClick={(e) => handleAnswer(e.target.value)}
+        disabled={user.role === 'QUIZ_MASTER'}
+        className={selectedAnswer === activeQuestion.answerC ? 'active' : ''}
       >
         {activeQuestion.answerC}
       </Button>
@@ -29,51 +51,72 @@ const MultipleChoiceAnswers = ({ activeQuestion }) => {
         color='primary'
         size='big'
         style={{ width: '45%', margin: '1rem' }}
+        value={activeQuestion.answerD}
+        onClick={(e) => handleAnswer(e.target.value)}
+        disabled={user.role === 'QUIZ_MASTER'}
+        className={selectedAnswer === activeQuestion.answerD ? 'active' : ''}
       >
         {activeQuestion.answerD}
       </Button>
-    </>
+    </div>
   );
 };
 
-const QuizActiveQuestion = ({ activeQuestion }) => {
-  if (!activeQuestion) return <h2>No Question Selected</h2>;
+const QuizActiveQuestion = ({
+  activeQuestion,
+  sendQuestionToPlayers,
+  sendAnswerToQuizmaster,
+}) => {
+  const { user } = useAuth();
+  const { setActiveQuestion } = useContext(QuizContext);
+
+  const [answer, setAnswer] = useState('');
+
+  const onButtonClickHandler = () => {
+    if (user.role === 'QUIZ_MASTER') sendQuestionToPlayers();
+    if (user.role === 'PLAYER') sendAnswerToQuizmaster(answer);
+    setAnswer('');
+    setActiveQuestion(null);
+  };
+
+  if (!activeQuestion)
+    return user.role === 'PLAYER' ? (
+      <h2>The Quizmaster is choosing a question. Please wait :)</h2>
+    ) : (
+      <h2>No Question Selected</h2>
+    );
 
   return (
     <>
-      <div>
-        <h2 className='my-3'>{activeQuestion.questionText}</h2>
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}
-          className='my-2'
-        >
-          {activeQuestion.type === 'MULTIPLE_CHOICE' ? (
-            <MultipleChoiceAnswers activeQuestion={activeQuestion} />
-          ) : (
-            <textarea
-              style={{ width: '90%', fontSize: '2.5rem' }}
-              rows='5'
-            ></textarea>
-          )}
+      <div className='active-question'>
+        <h2 className='my-2'>{activeQuestion.questionText}</h2>
+        {activeQuestion.type === 'MULTIPLE_CHOICE' ? (
+          <MultipleChoiceAnswers
+            activeQuestion={activeQuestion}
+            user={user}
+            setAnswer={setAnswer}
+          />
+        ) : (
+          <textarea
+            rows='8'
+            className='active-question__text-answer'
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+            disabled={user.role === 'QUIZ_MASTER'}
+          ></textarea>
+        )}
+
+        <div className='active-question__btn-wrapper'>
+          <Button
+            color='success'
+            size='big'
+            display='block'
+            style={{ marginRight: '0' }}
+            onClick={onButtonClickHandler}
+          >
+            {user.role === 'PLAYER' ? 'Submit answer' : 'Send question'}
+          </Button>
         </div>
-        <Button
-          color='success'
-          size='big'
-          display='block'
-          style={{
-            width: '90%',
-            position: 'absolute',
-            bottom: '20px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-          }}
-        >
-          Send question
-        </Button>
       </div>
     </>
   );

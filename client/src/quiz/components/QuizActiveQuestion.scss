@@ -1,0 +1,28 @@
+@import '../../sass/variables';
+
+.active-question {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  &__text-answer {
+    width: 80%;
+    height: 40%;
+    font-size: 2.5rem;
+  }
+
+  &__btn-wrapper {
+    width: 50%;
+    margin: 1rem;
+  }
+
+  &__multiple-choice {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

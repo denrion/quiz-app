@@ -12,36 +12,63 @@ import './QuizPage.scss';
 
 const QuizPage = () => {
   const { getQuiz, loading, quiz, activeQuestion } = useContext(QuizContext);
+
   const { quizId } = useParams();
 
-  const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState();
+  const [playerAnswers, setPlayerAnswers] = useState([]);
 
   useEffect(() => {
     getQuiz(quizId);
+
+    // Establish socket connection on page load
+    const socket = socketIOClient(BASE_URL);
+    setSocket(socket);
+
     // eslint-disable-next-line
   }, []);
 
-  // Establish a socket connection
+  // Listen for sendAnswerToQuizmaster
   useEffect(() => {
-    const socket = socketIOClient(BASE_URL);
-    setSocket(socket);
-  }, []);
+    socket &&
+      socket.on('sendAnswerToQuizmaster', (answer) =>
+        setPlayerAnswers((playerAnswers) => [...playerAnswers, answer])
+      );
+  }, [socket]);
 
-  // if (user.role === 'PLAYER') return <PlayerQuizPage />;
+  const onSendQuestionToPlayersHanlder = () => {
+    const { answer, createdAt, ...questionForPlayer } = activeQuestion;
+    socket && socket.emit('showQuestionToPlayer', questionForPlayer);
+  };
+
   if (loading || !quiz) return <Spinner />;
 
   return (
     <>
       <div className='quiz'>
         <Card className='quiz__active-question'>
-          <QuizActiveQuestion activeQuestion={activeQuestion} />
+          <QuizActiveQuestion
+            activeQuestion={activeQuestion}
+            sendQuestionToPlayers={onSendQuestionToPlayersHanlder}
+          />
         </Card>
         <Card className='quiz__questions'>
-          {quiz.questions && (
-            <QuizQuestionsList questions={quiz.questions} socket={socket} />
-          )}
+          {quiz.questions && <QuizQuestionsList questions={quiz.questions} />}
         </Card>
-        <Card className='quiz__stats'>Stats go here</Card>
+        <Card className='quiz__stats'>
+          <h1>Stats go here</h1>
+          <ul>
+            {playerAnswers &&
+              playerAnswers.map((playerAnswer) => (
+                <li>
+                  <span style={{ fontWeight: 'bold' }}>
+                    {playerAnswer.user.displayName}
+                  </span>
+                  : {playerAnswer.answer}
+                </li>
+              ))}
+          </ul>
+        </Card>
         <Card className='quiz__participants'>
           {quiz.participants && (
             <QuizParticipantsList participants={quiz.participants} />

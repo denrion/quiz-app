@@ -5,7 +5,7 @@ import Questions from '../../question/components/Questions';
 import QuizzesList from '../../quiz/components/QuizzesList';
 import QuizzModalForm from '../../quiz/components/QuizzModalForm';
 import Button from '../components/FormElements/Button';
-import Spinner from '../components/UIElements/Spinner';
+import FullPageSpinner from '../components/UIElements/FullPageSpinner';
 import './QuizMasterDashboard.scss';
 
 const QuizMasterDashboard = () => {
@@ -25,7 +25,7 @@ const QuizMasterDashboard = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (loading && !quizzes) return <Spinner />;
+  if (loading && !quizzes) return <FullPageSpinner />;
 
   return (
     <>

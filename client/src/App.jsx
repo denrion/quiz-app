@@ -49,7 +49,7 @@ const App = () => {
               roles='QUIZ_MASTER, PLAYER'
               component={QuizPage}
             />
-            <Route
+            <PrivateRoute
               exact
               path='/quizzes/:quizId/:playerId'
               component={PlayerQuizPage}
