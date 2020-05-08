@@ -7,12 +7,18 @@ import './PlayerQuizPage.scss';
 
 const PlayerQuizPage = () => {
   const [activeQuestion, setActiveQuestion] = useState();
+  const [socket, setSocket] = useState();
 
   // SOCKET CONNECTION HERE
   useEffect(() => {
     const socket = socketIOClient(BASE_URL);
-    console.log(socket);
+    setSocket(socket);
   }, []);
+
+  useEffect(() => {
+    socket &&
+      socket.on('activeQuestion', (question) => setActiveQuestion(question));
+  }, [socket, activeQuestion]);
 
   return (
     <div className='player-quiz'>

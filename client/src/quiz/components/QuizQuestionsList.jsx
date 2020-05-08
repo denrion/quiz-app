@@ -2,8 +2,15 @@ import React, { useContext } from 'react';
 import { QuizContext } from '../../context/quiz/QuizProvider';
 import QuizQuestionItem from './QuizQuestionItem';
 
-const QuizQuestionsList = ({ questions }) => {
+const QuizQuestionsList = ({ questions, socket }) => {
   const { setActiveQuestion } = useContext(QuizContext);
+
+  const onSetActiveQuestionHandler = (question) => {
+    setActiveQuestion(question);
+    const { answer, createdAt, ...questionForPlayer } = question;
+
+    socket.emit('activeQuestion', questionForPlayer);
+  };
 
   return (
     <ul>
@@ -12,7 +19,7 @@ const QuizQuestionsList = ({ questions }) => {
           <QuizQuestionItem
             key={question.id}
             question={question}
-            onClick={() => setActiveQuestion(question)}
+            onClick={() => onSetActiveQuestionHandler(question)}
           />
         ))}
     </ul>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
 import { QuizContext } from '../../context/quiz/QuizProvider';
@@ -14,6 +14,8 @@ const QuizPage = () => {
   const { getQuiz, loading, quiz, activeQuestion } = useContext(QuizContext);
   const { quizId } = useParams();
 
+  const [socket, setSocket] = useState(null);
+
   useEffect(() => {
     getQuiz(quizId);
     // eslint-disable-next-line
@@ -22,7 +24,7 @@ const QuizPage = () => {
   // Establish a socket connection
   useEffect(() => {
     const socket = socketIOClient(BASE_URL);
-    console.log(socket);
+    setSocket(socket);
   }, []);
 
   // if (user.role === 'PLAYER') return <PlayerQuizPage />;
@@ -35,7 +37,9 @@ const QuizPage = () => {
           <QuizActiveQuestion activeQuestion={activeQuestion} />
         </Card>
         <Card className='quiz__questions'>
-          {quiz.questions && <QuizQuestionsList questions={quiz.questions} />}
+          {quiz.questions && (
+            <QuizQuestionsList questions={quiz.questions} socket={socket} />
+          )}
         </Card>
         <Card className='quiz__stats'>Stats go here</Card>
         <Card className='quiz__participants'>
