@@ -28,6 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.10",
     "react-data-table-component": "^6.9.1",
+    "socket.io": "^2.3.0",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {

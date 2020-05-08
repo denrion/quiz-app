@@ -1,4 +1,6 @@
 const colors = require('colors');
+const http = require('http');
+const socketIo = require('socket.io');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -13,10 +15,16 @@ if (process.env.NODE_ENV === 'production') {
 
 const app = require('./app');
 const connectMongoDB = require('./config/connectMongoDB');
+const socketConnection = require('./socketConnection');
 
 connectMongoDB();
 
-const server = app.listen(process.env.PORT, () =>
+const server = http.createServer(app);
+const io = socketIo(server);
+
+io.on('connection', socketConnection);
+
+server.listen(process.env.PORT, () =>
   console.log(
     colors.yellow.bold('Server is running in %s mode, on port %s'),
     process.env.NODE_ENV,

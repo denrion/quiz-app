@@ -10,6 +10,7 @@ import Login from './auth/pages/Login';
 import Register from './auth/pages/Register';
 import useAuth from './hooks/useAuth';
 import SubmitQuestion from './question/pages/SubmitQuestion';
+import PlayerQuizPage from './quiz/pages/PlayerQuizPage';
 import QuizPage from './quiz/pages/QuizPage';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import PrivateRoute from './shared/components/Routing/PrivateRoute';
@@ -47,6 +48,11 @@ const App = () => {
               path='/quizzes/:quizId'
               roles='QUIZ_MASTER, PLAYER'
               component={QuizPage}
+            />
+            <Route
+              exact
+              path='/quizzes/:quizId/:playerId'
+              component={PlayerQuizPage}
             />
             <Redirect to='/' />
           </Switch>

@@ -1,13 +1,14 @@
 import axios from 'axios';
 
-let baseURL = 'http://localhost:5000/api/v1/';
+export const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://les-quizerables.herokuapp.com'
+    : 'http://localhost:5000';
 
-if (process.env.NODE_ENV === 'production') {
-  baseURL = 'https://les-quizerables.herokuapp.com/api/v1/';
-}
+let API_URL = `${BASE_URL}/api/v1/`;
 
 const API = axios.create({
-  baseURL,
+  baseURL: API_URL,
   responseType: 'json',
 });
 

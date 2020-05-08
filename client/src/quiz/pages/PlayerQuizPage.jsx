@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import socketIOClient from 'socket.io-client';
 import Card from '../../shared/components/UIElements/Card';
+import { BASE_URL } from '../../utils/API';
 import QuizActiveQuestion from '../components/QuizActiveQuestion';
 import './PlayerQuizPage.scss';
 
@@ -7,6 +9,10 @@ const PlayerQuizPage = () => {
   const [activeQuestion, setActiveQuestion] = useState();
 
   // SOCKET CONNECTION HERE
+  useEffect(() => {
+    const socket = socketIOClient(BASE_URL);
+    console.log(socket);
+  }, []);
 
   return (
     <div className='player-quiz'>

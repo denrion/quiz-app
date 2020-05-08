@@ -9,7 +9,7 @@ const status = require('http-status');
  * @access  Private
  */
 exports.addQuestionsToQuiz = catchAsync(async (req, res, next) => {
-  const quiz = await Quiz.findById(
+  const quiz = await Quiz.findByIdAndUpdate(
     req.params.quizId,
     {
       $push: { questions: req.body },
