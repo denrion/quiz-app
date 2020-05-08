@@ -1,6 +1,8 @@
 const colors = require('colors');
 const dotenv = require('dotenv');
 
+dotenv.config();
+
 if (process.env.NODE_ENV === 'production') {
   process.on('uncaughtException', (err) => {
     console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
@@ -8,8 +10,6 @@ if (process.env.NODE_ENV === 'production') {
     process.exit(1);
   });
 }
-
-dotenv.config();
 
 const app = require('./app');
 const connectMongoDB = require('./config/connectMongoDB');

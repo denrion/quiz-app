@@ -19,7 +19,11 @@ const PlayerDashboard = () => {
 
   return (
     <section className='player-quizzes'>
-      <QuizzesList quizzes={quizzes} />
+      {quizzes && quizzes.length === 0 ? (
+        <h1>There are no active quizzes right now</h1>
+      ) : (
+        <QuizzesList quizzes={quizzes} />
+      )}
     </section>
   );
 };
