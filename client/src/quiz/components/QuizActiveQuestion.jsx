@@ -81,29 +81,43 @@ const QuizActiveQuestion = ({
 
   if (!activeQuestion)
     return user.role === 'PLAYER' ? (
-      <h2>The Quizmaster is choosing a question. Please wait :)</h2>
+      <h2 style={{ margin: '5rem' }}>
+        The Quizmaster is choosing a question. Please wait 😊
+      </h2>
     ) : (
       <h2>No Question Selected</h2>
     );
 
+  const userSubmittedAQuestion = activeQuestion.submittedBy.id === user.id;
+
   return (
     <>
       <div className='active-question'>
-        <h2 className='my-2'>{activeQuestion.questionText}</h2>
-        {activeQuestion.type === 'MULTIPLE_CHOICE' ? (
-          <MultipleChoiceAnswers
-            activeQuestion={activeQuestion}
-            user={user}
-            setAnswer={setAnswer}
-          />
+        {activeQuestion && userSubmittedAQuestion ? (
+          <h2>
+            Unfortunatelly, you cannot answer this question because you were the
+            one who submitted it. Click Submit Answer to continue. Thank you for
+            your questions ❤
+          </h2>
         ) : (
-          <textarea
-            rows='8'
-            className='active-question__text-answer'
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-            disabled={user.role === 'QUIZ_MASTER'}
-          ></textarea>
+          <>
+            <h2 className='my-2'>{activeQuestion.questionText}</h2>
+            {activeQuestion.type === 'MULTIPLE_CHOICE' ? (
+              <MultipleChoiceAnswers
+                activeQuestion={activeQuestion}
+                user={user}
+                setAnswer={setAnswer}
+              />
+            ) : (
+              <textarea
+                rows='8'
+                className='active-question__text-answer'
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+                disabled={user.role === 'QUIZ_MASTER'}
+              ></textarea>
+            )}
+          </>
         )}
 
         <div className='active-question__btn-wrapper'>
@@ -113,8 +127,15 @@ const QuizActiveQuestion = ({
             display='block'
             style={{ marginRight: '0' }}
             onClick={onButtonClickHandler}
+            disabled={
+              user.role === 'PLAYER' && !userSubmittedAQuestion && answer === ''
+            }
           >
-            {user.role === 'PLAYER' ? 'Submit answer' : 'Send question'}
+            {user.role === 'PLAYER'
+              ? activeQuestion && userSubmittedAQuestion
+                ? 'Continue'
+                : 'Submit answer'
+              : 'Send question'}
           </Button>
         </div>
       </div>
