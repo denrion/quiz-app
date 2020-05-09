@@ -21,7 +21,7 @@ const app = express(express.json({ extended: false }));
 // 1) GLOBAL MIDDLEWARES
 
 // SET security HTTP headers
-// app.use(helmet());
+app.use(helmet());
 
 // Body Parser, reading data from body into req.body
 app.use(express.json({ limit: process.env.BODY_PARSER_SIZE_LIMIT }));
