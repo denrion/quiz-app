@@ -60,10 +60,24 @@
   &--primary {
     @include button-state-colors($color-primary);
 
+    // REMOVE AFTER MILO
+    color: $color-white;
+
     &:not(.button--cta):hover,
     &:not(.button--cta).active {
       background-color: $color-secondary;
       border-color: $color-secondary;
+      color: $color-primary-dark;
+    }
+  }
+
+  &--secondary {
+    @include button-state-colors($color-secondary);
+
+    &:not(.button--cta):hover,
+    &:not(.button--cta).active {
+      background-color: $color-secondary;
+      border-color: $color-primary-dark;
       color: $color-primary-dark;
     }
   }

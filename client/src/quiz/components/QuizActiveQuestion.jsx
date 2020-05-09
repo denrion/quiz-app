@@ -125,7 +125,7 @@ const QuizActiveQuestion = ({
 
         <div className='active-question__btn-wrapper'>
           <Button
-            color='success'
+            color='secondary'
             size='big'
             display='block'
             style={{ marginRight: '0' }}

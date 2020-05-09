@@ -15,7 +15,22 @@ const MainNavigation = ({ title, icon }) => {
       </button>
       <h1 className='main-navigation__title'>
         <Link to='/'>
-          <i className={icon} /> {title}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <img
+              src={
+                process.env.PUBLIC_URL + '/coat_of_arms_of_Montenegro.svg.png'
+              }
+              alt='logo'
+              width='40px'
+              style={{ marginRight: '1rem' }}
+            />
+            {/* <i className={icon} />  */} {title}
+          </div>
         </Link>
       </h1>
       <nav>
@@ -31,7 +46,7 @@ MainNavigation.propTypes = {
 };
 
 MainNavigation.defaultProps = {
-  title: 'Les Quizerables',
+  title: 'Milokviz',
   icon: 'fas fa-question-circle',
 };
 
