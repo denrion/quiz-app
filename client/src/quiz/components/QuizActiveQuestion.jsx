@@ -96,18 +96,15 @@ const QuizActiveQuestion = ({
   return (
     <>
       <div className='active-question'>
+        <h2 className='my-2'>{activeQuestion.questionText}</h2>
+
         {activeQuestion && userSubmittedAQuestion ? (
-          <h2>
-            Unfortunatelly, you cannot answer this question because you were the
-            one who submitted it. Click Submit Answer to continue. Thank you for
-            your questions
-            <span role='img' aria-label='heart'>
-              ❤
-            </span>
-          </h2>
+          <h4 className='center my-2'>
+            Unfortunately, you cannot answer this question because you were the
+            one who submitted it. Thank you for your questions ❤
+          </h4>
         ) : (
           <>
-            <h2 className='my-2'>{activeQuestion.questionText}</h2>
             {activeQuestion.type === 'MULTIPLE_CHOICE' ? (
               <MultipleChoiceAnswers
                 activeQuestion={activeQuestion}
