@@ -39,7 +39,7 @@ app.use(express.json({ limit: process.env.BODY_PARSER_SIZE_LIMIT }));
 app.use(mongoSanitize());
 
 // Data sanitization agains XSS
-// app.use(xss());
+app.use(xss());
 
 // Prevent http parameter polution
 // specify parameters that are allowed to be repeated
