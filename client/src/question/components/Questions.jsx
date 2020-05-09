@@ -21,6 +21,7 @@ const Questions = () => {
   const { register, handleSubmit } = useForm();
 
   const [selectedRows, setSelectedRows] = useState([]);
+  const [toggleCleared, setToggleCleared] = React.useState(false);
 
   useEffect(() => {
     if (questions.length === 0) getQuestions();
@@ -31,8 +32,8 @@ const Questions = () => {
     alert(`Delete question (id: ${id}) - not implemented yet`);
   }, []);
 
-  const onEditHandler = useCallback((id) => {
-    alert(`Edit question (id: ${id}) - not implemented yet`);
+  const onEditHandler = useCallback((row) => {
+    alert(`Edit question (id: ${row.id}) - not implemented yet`);
   }, []);
 
   const actions = (
@@ -83,7 +84,7 @@ const Questions = () => {
             <Button
               size='small'
               color='warning'
-              onClick={() => onEditHandler(row.id)}
+              onClick={() => onEditHandler(row)}
             >
               <i className='fas fa-edit'></i>
             </Button>
@@ -114,6 +115,15 @@ const Questions = () => {
     []
   );
 
+  // FIND A BETTER WAY TO DO THIS
+  const selectableRowCriteria = (row) => {
+    const [result] = quizzes.map((quiz) => {
+      return quiz.questions.includes(row.id);
+    });
+
+    return result;
+  };
+
   const onSelectedRowsChangeHandler = useCallback(
     (state) => setSelectedRows(state.selectedRows),
     []
@@ -130,6 +140,7 @@ const Questions = () => {
     const onSubmitHandler = (formData) => {
       const selectedQuizIds = selectedRows.map((quiz) => quiz.id);
       addQuestionsToQuiz(formData.quiz, selectedQuizIds);
+      setToggleCleared(!toggleCleared);
     };
 
     return (
@@ -180,10 +191,12 @@ const Questions = () => {
         expandableRows
         expandOnRowClicked
         expandableRowsComponent={<Question />}
+        highlightOnHover
         selectableRows
         selectableRowsHighlight
-        highlightOnHover
         onSelectedRowsChange={onSelectedRowsChangeHandler}
+        clearSelectedRows={toggleCleared}
+        selectableRowDisabled={selectableRowCriteria}
         actions={actions}
         contextActions={contextActions}
       />

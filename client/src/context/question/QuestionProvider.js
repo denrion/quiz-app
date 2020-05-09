@@ -7,6 +7,7 @@ import {
   GET_QUESTIONS,
   QUESTION_ERROR,
   SUBMIT_QUESTION,
+  UPDATE_QUESTION,
 } from './questionTypes';
 
 const INITIAL_STATE = {
@@ -20,6 +21,7 @@ const CONTEXT_STATE = {
   ...INITIAL_STATE,
   getQuestions: (page = 1, limit = 10, sort = '-createdAt') => {},
   submitQuestion: (formData) => {},
+  updateQuestion: (question) => {},
 };
 
 export const QuestionContext = createContext(CONTEXT_STATE);
@@ -39,6 +41,25 @@ export const QuestionProvider = ({ children }) => {
       dispatch({
         type: GET_QUESTIONS,
         payload: response.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: QUESTION_ERROR,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+  const updateQuestion = async (question) => {
+    try {
+      setLoading(dispatch);
+
+      console.log(question);
+      const response = await API.patch(`questions/${question.id}`, question);
+
+      dispatch({
+        type: UPDATE_QUESTION,
+        payload: response.data.data.question,
       });
     } catch (error) {
       dispatch({
@@ -80,6 +101,7 @@ export const QuestionProvider = ({ children }) => {
         ...state,
         getQuestions,
         submitQuestion,
+        updateQuestion,
       }}
     >
       {children}

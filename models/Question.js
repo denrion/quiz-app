@@ -128,6 +128,17 @@ QuestionSchema.pre(/^find/, function (next) {
   next();
 });
 
+QuestionSchema.post('save', async function (doc, next) {
+  await doc
+    .populate({
+      path: 'submittedBy',
+      select: 'displayName',
+    })
+    .execPopulate();
+
+  next();
+});
+
 // ************************ INSTANCE METHODS ************************ //
 
 // ************************ STATIC METHODS ************************ //

@@ -12,7 +12,7 @@ const INITIAL_STATE = {
 
 const CONTEXT_STATE = {
   ...INITIAL_STATE,
-  getUsers: (field, page = 1, limit = 100, sort = '-createdAt') => {},
+  getUsers: (filters = [], page = 1, limit = 100, sort = '-createdAt') => {},
 };
 
 export const UserContext = createContext(CONTEXT_STATE);
