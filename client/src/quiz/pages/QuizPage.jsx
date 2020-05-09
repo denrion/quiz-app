@@ -48,6 +48,7 @@ const QuizPage = () => {
     socket && socket.emit('showQuestionToPlayer', questionForPlayer);
     removeQuestionFromQuizTemp(activeQuestion);
     setActiveQuestionStats(activeQuestion);
+    setPlayerAnswers([]);
   };
 
   if (loading || !quiz) return <Spinner />;
