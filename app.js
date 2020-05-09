@@ -27,13 +27,13 @@ app.use(helmet());
 app.use(express.json({ limit: process.env.BODY_PARSER_SIZE_LIMIT }));
 
 // Rate limiting - for stopping BRUTE FORCE attacks from same IP
-// const limiter = rateLimit({
-//   max: process.env.RATE_LIMIT_MAX_NUM_CONNECTIONS,
-//   windowMs: process.env.RATE_LIMIT_KEEP_IN_MEMORY_LENGTH_MS,
-//   message: process.env.RATE_LIMIT_MESSAGE,
-// });
+const limiter = rateLimit({
+  max: process.env.RATE_LIMIT_MAX_NUM_CONNECTIONS,
+  windowMs: process.env.RATE_LIMIT_KEEP_IN_MEMORY_LENGTH_MS,
+  message: process.env.RATE_LIMIT_MESSAGE,
+});
 
-// app.use('/api', limiter);
+app.use('/api', limiter);
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
