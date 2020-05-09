@@ -33,7 +33,7 @@ app.use(express.json({ limit: process.env.BODY_PARSER_SIZE_LIMIT }));
 //   message: process.env.RATE_LIMIT_MESSAGE,
 // });
 
-app.use('/api', limiter);
+// app.use('/api', limiter);
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
