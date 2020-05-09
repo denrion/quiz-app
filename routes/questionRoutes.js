@@ -13,7 +13,7 @@ router.use(isAuth);
 
 router
   .route('/')
-  .get(restrictTo('ADMIN', 'QUIZ_MASTER'), getAllQuestions)
+  .get(restrictTo('ADMIN', 'QUIZMASTER'), getAllQuestions)
   .post(setFieldFromRequest('submittedBy'), createQuestion);
 
 // router.route('/:id').get().patch().delete();

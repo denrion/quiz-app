@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['PLAYER', 'QUIZ_MASTER'],
+      enum: ['PLAYER', 'QUIZMASTER'],
       default: 'PLAYER',
       required: true,
       uppercase: true,

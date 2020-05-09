@@ -16,7 +16,7 @@ router.use(isAuth);
 
 router.route('/').get(getAllQuizzes);
 
-router.use(isAuth, restrictTo('ADMIN', 'QUIZ_MASTER'));
+router.use(isAuth, restrictTo('ADMIN', 'QUIZMASTER'));
 
 router.route('/').post(setFieldFromRequest('quizmaster'), createQuiz);
 router.route('/:id').get(getQuiz);

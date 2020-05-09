@@ -14,7 +14,7 @@ const AddParticipantModalForm = ({ showModal, toggleModal }) => {
     if (!users)
       getUsers([
         { fieldName: 'role', value: 'PLAYER' },
-        { fieldName: 'role', value: 'QUIZ_MASTER' },
+        { fieldName: 'role', value: 'QUIZMASTER' },
       ]);
 
     // eslint-disable-next-line

@@ -11,7 +11,7 @@ const {
 
 const router = express.Router();
 
-router.use(isAuth, restrictTo('ADMIN', 'QUIZ_MASTER'));
+router.use(isAuth, restrictTo('ADMIN', 'QUIZMASTER'));
 
 router.route('/').get(getAllUsers).post(createUser);
 

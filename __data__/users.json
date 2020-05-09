@@ -7,24 +7,10 @@
     "password": "test1234"
   },
   {
-    "_id": "5eada7ba2c238448705e9acb",
-    "displayName": "QuizMaster",
+    "_id": "5e5fee92fb6d94630827c4aa",
+    "displayName": "Quizmaster",
     "username": "quizmaster",
-    "role": "quiz_master",
+    "role": "quizmaster",
     "password": "test1234"
-  },
-  {
-    "_id": "5eaed2302ba0cd40d403b8b0",
-    "role": "PLAYER",
-    "displayName": "Test1",
-    "username": "test1",
-    "password": "test1234"
-  },
-  {
-    "_id": "5eaed7138261da3ee4baf5e0",
-    "role": "PLAYER",
-    "displayName": "Test2",
-    "username": "test2",
-    "password": "test1234i"
   }
 ]

@@ -46,7 +46,7 @@ const App = () => {
             <PrivateRoute
               exact
               path='/quizzes/:quizId'
-              roles='QUIZ_MASTER, PLAYER'
+              roles='QUIZMASTER, PLAYER'
               component={QuizPage}
             />
             <PrivateRoute

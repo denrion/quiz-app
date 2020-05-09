@@ -20,7 +20,7 @@ const MultipleChoiceAnswers = ({ activeQuestion, user, setAnswer }) => {
         style={{ width: '45%', margin: '1rem' }}
         value={activeQuestion.answerA}
         onClick={(e) => handleAnswer(e.target.value)}
-        disabled={user.role === 'QUIZ_MASTER'}
+        disabled={user.role === 'QUIZMASTER'}
         className={selectedAnswer === activeQuestion.answerA ? 'active' : ''}
       >
         {activeQuestion.answerA}
@@ -31,7 +31,7 @@ const MultipleChoiceAnswers = ({ activeQuestion, user, setAnswer }) => {
         style={{ width: '45%', margin: '1rem' }}
         value={activeQuestion.answerB}
         onClick={(e) => handleAnswer(e.target.value)}
-        disabled={user.role === 'QUIZ_MASTER'}
+        disabled={user.role === 'QUIZMASTER'}
         className={selectedAnswer === activeQuestion.answerB ? 'active' : ''}
       >
         {activeQuestion.answerB}
@@ -42,7 +42,7 @@ const MultipleChoiceAnswers = ({ activeQuestion, user, setAnswer }) => {
         style={{ width: '45%', margin: '1rem' }}
         value={activeQuestion.answerC}
         onClick={(e) => handleAnswer(e.target.value)}
-        disabled={user.role === 'QUIZ_MASTER'}
+        disabled={user.role === 'QUIZMASTER'}
         className={selectedAnswer === activeQuestion.answerC ? 'active' : ''}
       >
         {activeQuestion.answerC}
@@ -53,7 +53,7 @@ const MultipleChoiceAnswers = ({ activeQuestion, user, setAnswer }) => {
         style={{ width: '45%', margin: '1rem' }}
         value={activeQuestion.answerD}
         onClick={(e) => handleAnswer(e.target.value)}
-        disabled={user.role === 'QUIZ_MASTER'}
+        disabled={user.role === 'QUIZMASTER'}
         className={selectedAnswer === activeQuestion.answerD ? 'active' : ''}
       >
         {activeQuestion.answerD}
@@ -73,7 +73,7 @@ const QuizActiveQuestion = ({
   const [answer, setAnswer] = useState('');
 
   const onButtonClickHandler = () => {
-    if (user.role === 'QUIZ_MASTER') sendQuestionToPlayers();
+    if (user.role === 'QUIZMASTER') sendQuestionToPlayers();
     if (user.role === 'PLAYER') sendAnswerToQuizmaster(answer);
     setAnswer('');
     setActiveQuestion(null);
@@ -120,7 +120,7 @@ const QuizActiveQuestion = ({
                 className='active-question__text-answer'
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
-                disabled={user.role === 'QUIZ_MASTER'}
+                disabled={user.role === 'QUIZMASTER'}
               ></textarea>
             )}
           </>

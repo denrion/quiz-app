@@ -8,7 +8,7 @@ const Home = () => {
   const { user } = useAuth();
 
   if (user.role === 'ADMIN') return <AdminDashboard />;
-  else if (user.role === 'QUIZ_MASTER') return <QuizMasterDashboard />;
+  else if (user.role === 'QUIZMASTER') return <QuizMasterDashboard />;
   else return <PlayerDashboard />;
 };
 
