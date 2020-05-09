@@ -21,17 +21,17 @@ const app = express(express.json({ extended: false }));
 // 1) GLOBAL MIDDLEWARES
 
 // SET security HTTP headers
-app.use(helmet());
+// app.use(helmet());
 
 // Body Parser, reading data from body into req.body
 app.use(express.json({ limit: process.env.BODY_PARSER_SIZE_LIMIT }));
 
 // Rate limiting - for stopping BRUTE FORCE attacks from same IP
-const limiter = rateLimit({
-  max: process.env.RATE_LIMIT_MAX_NUM_CONNECTIONS,
-  windowMs: process.env.RATE_LIMIT_KEEP_IN_MEMORY_LENGTH_MS,
-  message: process.env.RATE_LIMIT_MESSAGE,
-});
+// const limiter = rateLimit({
+//   max: process.env.RATE_LIMIT_MAX_NUM_CONNECTIONS,
+//   windowMs: process.env.RATE_LIMIT_KEEP_IN_MEMORY_LENGTH_MS,
+//   message: process.env.RATE_LIMIT_MESSAGE,
+// });
 
 app.use('/api', limiter);
 
@@ -39,15 +39,15 @@ app.use('/api', limiter);
 app.use(mongoSanitize());
 
 // Data sanitization agains XSS
-app.use(xss());
+// app.use(xss());
 
 // Prevent http parameter polution
 // specify parameters that are allowed to be repeated
-app.use(
-  hpp({
-    whitelist: [],
-  })
-);
+// app.use(
+//   hpp({
+//     whitelist: [],
+//   })
+// );
 
 // Compress API data
 app.use(compression());
