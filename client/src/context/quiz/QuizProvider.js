@@ -11,6 +11,7 @@ import {
   GET_QUIZZES,
   QUIZ_ERROR,
   SET_ACTIVE_QUESTION,
+  TEMP_REMOVE_QUESTION_FROM_QUIZ,
 } from './quizTypes';
 
 const INITIAL_STATE = {
@@ -30,6 +31,7 @@ const CONTEXT_STATE = {
   addQuestionsToQuiz: (quizId, questions) => {},
   addParticipantsToQuiz: (quizId, participants) => {},
   setActiveQuestion: (question) => {},
+  removeQuestionFromQuizTemp: (quizId, questionId) => {},
 };
 
 export const QuizContext = createContext(CONTEXT_STATE);
@@ -127,6 +129,12 @@ export const QuizProvider = ({ children }) => {
     }
   };
 
+  const removeQuestionFromQuizTemp = async (question) =>
+    dispatch({
+      type: TEMP_REMOVE_QUESTION_FROM_QUIZ,
+      payload: question,
+    });
+
   const setActiveQuestion = async (question) =>
     dispatch({ type: SET_ACTIVE_QUESTION, payload: question });
 
@@ -140,6 +148,7 @@ export const QuizProvider = ({ children }) => {
         addQuestionsToQuiz,
         addParticipantsToQuiz,
         setActiveQuestion,
+        removeQuestionFromQuizTemp,
       }}
     >
       {children}

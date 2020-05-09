@@ -11,12 +11,19 @@ import QuizQuestionsList from '../components/QuizQuestionsList';
 import './QuizPage.scss';
 
 const QuizPage = () => {
-  const { getQuiz, loading, quiz, activeQuestion } = useContext(QuizContext);
+  const {
+    getQuiz,
+    loading,
+    quiz,
+    activeQuestion,
+    removeQuestionFromQuizTemp,
+  } = useContext(QuizContext);
 
   const { quizId } = useParams();
 
   const [socket, setSocket] = useState();
   const [playerAnswers, setPlayerAnswers] = useState([]);
+  const [activeQuestionStats, setActiveQuestionStats] = useState();
 
   useEffect(() => {
     getQuiz(quizId);
@@ -39,6 +46,8 @@ const QuizPage = () => {
   const onSendQuestionToPlayersHanlder = () => {
     const { answer, createdAt, ...questionForPlayer } = activeQuestion;
     socket && socket.emit('showQuestionToPlayer', questionForPlayer);
+    removeQuestionFromQuizTemp(activeQuestion);
+    setActiveQuestionStats(activeQuestion);
   };
 
   if (loading || !quiz) return <Spinner />;
@@ -56,15 +65,27 @@ const QuizPage = () => {
           {quiz.questions && <QuizQuestionsList questions={quiz.questions} />}
         </Card>
         <Card className='quiz__stats'>
-          <h1>Stats go here</h1>
           <ul>
+            <h3>{activeQuestionStats && activeQuestionStats.questionText}</h3>
+            <h3 style={{ color: 'green' }}>
+              {activeQuestionStats &&
+                (activeQuestionStats.answer
+                  ? activeQuestionStats.answer
+                  : activeQuestionStats.correctAnswer)}
+            </h3>
+
+            <h3 className='m-2'>Player Answers:</h3>
             {playerAnswers &&
-              playerAnswers.map((playerAnswer) => (
-                <li>
+              playerAnswers.map((playerAnswer, index) => (
+                <li key={index}>
                   <span style={{ fontWeight: 'bold' }}>
                     {playerAnswer.user.displayName}
                   </span>
-                  : {playerAnswer.answer}
+                  :{' '}
+                  {activeQuestionStats &&
+                  activeQuestionStats.submittedBy.id === playerAnswer.user.id
+                    ? 'Not Eligable'
+                    : playerAnswer.answer}
                 </li>
               ))}
           </ul>

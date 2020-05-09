@@ -7,6 +7,7 @@ import {
   GET_QUIZZES,
   QUIZ_ERROR,
   SET_ACTIVE_QUESTION,
+  TEMP_REMOVE_QUESTION_FROM_QUIZ,
 } from './quizTypes';
 
 const quizReducer = (state, action) => {
@@ -52,6 +53,16 @@ const quizReducer = (state, action) => {
         ...state,
         activeQuestion: action.payload,
         loading: false,
+      };
+    case TEMP_REMOVE_QUESTION_FROM_QUIZ:
+      return {
+        ...state,
+        quiz: {
+          ...state.quiz,
+          questions: state.quiz.questions.filter(
+            (question) => question.id !== action.payload.id
+          ),
+        },
       };
     case QUIZ_ERROR:
       return {
