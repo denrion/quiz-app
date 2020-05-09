@@ -11,6 +11,7 @@ const UserSchema = new mongoose.Schema(
     displayName: {
       type: String,
       required: [true, 'This field is required'],
+      unique: true,
       trim: true,
       minlength: [2, 'Display name must contain at least 2 characters'],
       maxlength: [30, 'Display name must not contain more than 30 characters'],
@@ -23,6 +24,10 @@ const UserSchema = new mongoose.Schema(
       lowercase: true,
       minlength: [2, 'Username must contain at least 2 characters'],
       maxlength: [30, 'Username must not contain more than 30 characters'],
+      match: [
+        /^[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])*$/,
+        'Username can only contain letters, numbers, underscores and dashes',
+      ],
     },
     role: {
       type: String,
@@ -37,10 +42,18 @@ const UserSchema = new mongoose.Schema(
       minlength: [8, 'Password must contain at least 8 characters'],
       maxlength: [50, 'Password must not contain more than 50 characters'],
       select: false,
+      match: [
+        /^[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])*$/,
+        'Password can only contain letters, numbers, underscores and dashes',
+      ],
     },
     passwordConfirm: {
       type: String,
       required: [true, 'This field is required'],
+      match: [
+        /^[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])*$/,
+        'Password can only contain letters, numbers, underscores and dashes',
+      ],
       validate: {
         // This only works on CREATE and SAVE!!!
         validator: function (el) {

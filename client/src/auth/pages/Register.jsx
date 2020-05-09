@@ -14,7 +14,7 @@ const Register = ({ history }) => {
   useEffect(() => {
     if (isAuthenticated) history.push('/');
 
-    if (error) setAlert(error, 'danger');
+    if (error) setAlert(error, 'danger', 4000);
     clearErrors();
 
     // eslint-disable-next-line
@@ -73,6 +73,11 @@ const Register = ({ history }) => {
                 value: 30,
                 message: 'Username must not contain more than 30 characters',
               },
+              pattern: {
+                value: /^[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])*$/,
+                message:
+                  'Username can only contain letters, numbers, underscores and dashes',
+              },
             })}
           />
           {errors.username && (
@@ -96,6 +101,11 @@ const Register = ({ history }) => {
                 value: 50,
                 message: 'Password must not contain more than 50 characters',
               },
+              pattern: {
+                value: /^[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])*$/,
+                message:
+                  'Password can only contain letters, numbers, underscores and dashes',
+              },
             })}
           />
           {errors.password && (
@@ -113,11 +123,16 @@ const Register = ({ history }) => {
               required: 'This field is required',
               minLength: {
                 value: 8,
-                message: 'Passoword must contain at least 8 characters',
+                message: 'Password must contain at least 8 characters',
               },
               maxLength: {
                 value: 50,
-                message: 'Passoword must not contain more than 50 characters',
+                message: 'Password must not contain more than 50 characters',
+              },
+              pattern: {
+                value: /^[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])*$/,
+                message:
+                  'Password can only contain letters, numbers, underscores and dashes',
               },
               validate: (value) =>
                 value === getValues().password || 'Passwords do not match',

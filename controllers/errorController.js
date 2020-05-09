@@ -7,6 +7,9 @@ const sendErrorDev = (err, res) => {
   if (err.keyPattern && err.keyPattern.hasOwnProperty('username')) {
     err.message = `User with username ${err.keyValue['username']} already exists. Please use another value!`;
   }
+  if (err.keyPattern && err.keyPattern.hasOwnProperty('displayName')) {
+    err.message = `User with display name ${err.keyValue['displayName']} already exists. Please use another value!`;
+  }
 
   res.status(err.statusCode).json({
     status: err.status,
@@ -73,6 +76,8 @@ const handleDuplicateFieldsDB = (err) => {
     message = `User with username ${err.keyValue['username']} already exists. Please use another value!`;
   } else if (err.keyPattern.hasOwnProperty('email')) {
     message = `User with email ${err.keyValue['email']} already exists. Please use another value!`;
+  } else if (err.keyPattern && err.keyPattern.hasOwnProperty('displayName')) {
+    err.message = `User with display name ${err.keyValue['displayName']} already exists. Please use another value!`;
   }
 
   return new BadRequestError(message);
